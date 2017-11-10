@@ -307,7 +307,7 @@ class FnDeclNode extends DeclNode {
     public void nameAnalysis(SymTable symTab) {
         String returnType = myType.getType();
         LinkedList<String> paramTypes = myFormalsList.getParamTypes();
-        int params = paramTypes.size;
+        int params = paramTypes.size();
 
         myId.nameAnalysisFnDecl(symTab, returnType, params, paramTypes);
     }
