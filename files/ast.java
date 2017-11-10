@@ -736,6 +736,8 @@ class IdNode extends ExpNode {
             symTab.addDecl(myStrVal, mySym);
         } catch (DuplicateSymException e) {
             ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
+        } catch (EmptySymTableException e) {
+            //TODO maybe to do with scopes?
         }
     }
 
@@ -751,6 +753,8 @@ class IdNode extends ExpNode {
             symTab.addDecl(myStrVal, mySym);
         } catch (DuplicateSymException e) {
             ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
+        } catch (EmptySymTableException e) {
+            //TODO maybe to do with scopes?
         }
     }
 
