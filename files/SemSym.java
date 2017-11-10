@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class SemSym {
     private String name;
     private String type;

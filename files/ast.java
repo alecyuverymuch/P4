@@ -182,7 +182,7 @@ class FormalsListNode extends ASTnode {
         myFormals = S;
     }
 
-    public List<String> getParamTypes() {
+    public LinkedList<String> getParamTypes() {
         LinkedList<String> paramTypes = new LinkedList<String>();
         Iterator<FormalDeclNode> it = myFormals.iterator();
         while(it.hasNext()) {
@@ -738,7 +738,7 @@ class IdNode extends ExpNode {
         symTab.addDecl(myStrVal, mySym);
     }
 
-    public void nameAnalysisFnDecl(SymTable symTab, String returnType, int params, List<String> paramTypes) {
+    public void nameAnalysisFnDecl(SymTable symTab, String returnType, int params, LinkedList<String> paramTypes) {
         Iterator<String> it = paramTypes.iterator();
         while(it.hasNext()) {
             if (it.next().equals("void")) {
