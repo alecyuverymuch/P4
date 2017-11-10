@@ -263,6 +263,7 @@ class ExpListNode extends ASTnode {
 // **********************************************************************
 
 abstract class DeclNode extends ASTnode {
+    abstract void nameAnalysis(SymTable symTab);
 }
 
 class VarDeclNode extends DeclNode {
@@ -341,6 +342,10 @@ class FormalDeclNode extends DeclNode {
         return myType.getType();
     }
 
+    public void nameAnalysis(SymTable symTab){
+
+    }
+
     public void unparse(PrintWriter p, int indent) {
         myType.unparse(p, 0);
         p.print(" ");
@@ -356,6 +361,10 @@ class StructDeclNode extends DeclNode {
     public StructDeclNode(IdNode id, DeclListNode declList) {
         myId = id;
         myDeclList = declList;
+    }
+
+    public void nameAnalysis(SymTable symTab){
+        
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -379,7 +388,7 @@ class StructDeclNode extends DeclNode {
 // **********************************************************************
 
 abstract class TypeNode extends ASTnode {
-    public String getType();
+    abstract String getType();
 }
 
 class IntNode extends TypeNode {
