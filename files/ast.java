@@ -132,6 +132,7 @@ class ProgramNode extends ASTnode {
      */
     public void nameAnalysis() {
         SymTable symTab = new SymTable();
+        myDeclList.nameAnalysis(symTab);
 	// TODO: Add code here 
     }
 
@@ -146,6 +147,18 @@ class ProgramNode extends ASTnode {
 class DeclListNode extends ASTnode {
     public DeclListNode(List<DeclNode> S) {
         myDecls = S;
+    }
+
+    public void nameAnalysis(SymTable symTab) {
+        Iterator it = myDecls.iterator();
+        try {
+            while (it.hasNext()) {
+                ((DeclNode)it.next()).nameAnalysis(symTab);
+            }
+        } catch (NoSuchElementException ex) {
+            System.err.println("unexpected NoSuchElementException in DeclListNode.nameAnalysis");
+            System.exit(-1);
+        }
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -167,6 +180,15 @@ class DeclListNode extends ASTnode {
 class FormalsListNode extends ASTnode {
     public FormalsListNode(List<FormalDeclNode> S) {
         myFormals = S;
+    }
+
+    public List<String> getParamTypes() {
+        LinkedList<String> paramTypes = new LinkedList<String>();
+        Iterator<FormalDeclNode> it = myFormals.iterator();
+        while(it.hasNext()) {
+            paramTypes.addLast(it.next().getType());
+        }
+        return paramTypes;
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -250,6 +272,11 @@ class VarDeclNode extends DeclNode {
         mySize = size;
     }
 
+    public void nameAnalysis(SymTable symTab) {
+        String type = myType.getType();
+        myId.nameAnalysisVarDecl(symTab, type);
+    }
+
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
         myType.unparse(p, 0);
@@ -277,6 +304,14 @@ class FnDeclNode extends DeclNode {
         myBody = body;
     }
 
+    public void nameAnalysis(SymTable symTab) {
+        String returnType = myType.getType();
+        LinkedList<String> paramTypes = myFormalsList.getParamTypes();
+        int params = paramTypes.size;
+
+        myId.nameAnalysisFnDecl(symTab, returnType, params, paramTypes);
+    }
+
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
         myType.unparse(p, 0);
@@ -300,6 +335,10 @@ class FormalDeclNode extends DeclNode {
     public FormalDeclNode(TypeNode type, IdNode id) {
         myType = type;
         myId = id;
+    }
+
+    public String getType(){
+        return myType.getType();
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -340,10 +379,15 @@ class StructDeclNode extends DeclNode {
 // **********************************************************************
 
 abstract class TypeNode extends ASTnode {
+    public String getType();
 }
 
 class IntNode extends TypeNode {
     public IntNode() {
+    }
+
+    public String getType() {
+        return "int";
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -355,6 +399,10 @@ class BoolNode extends TypeNode {
     public BoolNode() {
     }
 
+    public String getType() {
+        return "bool";
+    }
+
     public void unparse(PrintWriter p, int indent) {
         p.print("bool");
     }
@@ -364,6 +412,10 @@ class VoidNode extends TypeNode {
     public VoidNode() {
     }
 
+    public String getType() {
+        return "void";
+    }
+
     public void unparse(PrintWriter p, int indent) {
         p.print("void");
     }
@@ -371,15 +423,21 @@ class VoidNode extends TypeNode {
 
 class StructNode extends TypeNode {
     public StructNode(IdNode id) {
-		myId = id;
+        myId = id;
+    }
+
+    public String getType() {
+        return "struct";
+    }
+
+    public IdNode getId() {
+        return myId;
     }
 
     public void unparse(PrintWriter p, int indent) {
         p.print("struct ");
 		myId.unparse(p, 0);
     }
-	
-	// 1 kid
     private IdNode myId;
 }
 
@@ -657,6 +715,32 @@ class IdNode extends ExpNode {
         myLineNum = lineNum;
         myCharNum = charNum;
         myStrVal = strVal;
+        mySym = null;
+    }
+
+    public void nameAnalysisVarDecl(SymTable symTab, String type) {
+        if (type.equals("void")) {
+            ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
+        }
+        if (symTab.lookupLocal(myStrVal) != null) {
+            ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
+        }
+        mySym = new SemSym(myStrVal, type);
+        symTab.addDecl(myStrVal, mySym);
+    }
+
+    public void nameAnalysisFnDecl(SymTable symTab, String returnType, int params, List<String> paramTypes) {
+        Iterator<String> it = paramTypes.iterator();
+        while(it.hasNext()) {
+            if (it.next().equals("void")) {
+                ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
+            }
+        }
+        if (symTab.lookupLocal(myStrVal) != null) {
+            ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
+        }
+        mySym = new SemSym(myStrVal, returnType, params, paramTypes);
+        symTab.addDecl(myStrVal, mySym);
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -666,6 +750,7 @@ class IdNode extends ExpNode {
     private int myLineNum;
     private int myCharNum;
     private String myStrVal;
+    public SemSym mySym;
 }
 
 class DotAccessExpNode extends ExpNode {
