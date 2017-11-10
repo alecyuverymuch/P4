@@ -5,7 +5,7 @@ public class SemSym {
     private String type;
     private boolean function;
     private int params;
-    private List<String> paramTypes;
+    private LinkedList<String> paramTypes;
     private String returnType;
     
     public SemSym(String name, String type) {
@@ -14,7 +14,7 @@ public class SemSym {
         function = false;
     }
 
-    public SemSym(String name, String returnType, int params, List<String> paramTypes){
+    public SemSym(String name, String returnType, int params, LinkedList<String> paramTypes){
         function = true;
         this.name = name;
         this.returnType = returnType;
