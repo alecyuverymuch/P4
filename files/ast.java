@@ -728,28 +728,30 @@ class IdNode extends ExpNode {
     }
 
     public void nameAnalysisVarDecl(SymTable symTab, String type) {
-        if (type.equals("void")) {
-            ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
-        }
-        if (symTab.lookupLocal(myStrVal) != null) {
+        try {
+            if (type.equals("void")) {
+                ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
+            }
+            mySym = new SemSym(myStrVal, type);
+            symTab.addDecl(myStrVal, mySym);
+        } catch (DuplicateSymException e) {
             ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
         }
-        mySym = new SemSym(myStrVal, type);
-        symTab.addDecl(myStrVal, mySym);
     }
 
     public void nameAnalysisFnDecl(SymTable symTab, String returnType, int params, LinkedList<String> paramTypes) {
-        Iterator<String> it = paramTypes.iterator();
-        while(it.hasNext()) {
-            if (it.next().equals("void")) {
-                ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
+        try {
+            Iterator<String> it = paramTypes.iterator();
+            while(it.hasNext()) {
+                if (it.next().equals("void")) {
+                    ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
+                }
             }
-        }
-        if (symTab.lookupLocal(myStrVal) != null) {
+            mySym = new SemSym(myStrVal, returnType, params, paramTypes);
+            symTab.addDecl(myStrVal, mySym);
+        } catch (DuplicateSymException e) {
             ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
         }
-        mySym = new SemSym(myStrVal, returnType, params, paramTypes);
-        symTab.addDecl(myStrVal, mySym);
     }
 
     public void unparse(PrintWriter p, int indent) {
