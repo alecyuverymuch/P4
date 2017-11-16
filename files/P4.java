@@ -59,7 +59,7 @@ public class P4 {
         if (ErrMsg.fatal == false) {
             ((ASTnode)root.value).nameAnalysis(symTable);
         }
-        System.out.println(symTable.toString());
+        System.out.println(symTable.print());
         if (ErrMsg.fatal == false) {
             ((ASTnode)root.value).unparse(outFile, 0);
         }
