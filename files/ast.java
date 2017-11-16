@@ -271,7 +271,6 @@ class ExpListNode extends ASTnode {
 // **********************************************************************
 
 abstract class DeclNode extends ASTnode {
-    abstract void nameAnalysis(SymTable symTab);
 }
 
 class VarDeclNode extends DeclNode {
