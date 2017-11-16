@@ -49,15 +49,18 @@ public class P4 {
                             // (i.e., of the nonterminal "program")
 
         try {
-            if (ErrMsg.fatal == false) {
-                root = P.parse(); 
-            }
+            root = P.parse(); 
             System.out.println ("program parsed correctly.");
         } catch (Exception ex){
             System.err.println("Exception occured during parse: " + ex);
             System.exit(-1);
         }
-        ((ASTnode)root.value).unparse(outFile, 0);
+        if (ErrMsg.fatal == false) {
+            ((ASTnode)root.value).nameAnalysis();
+        } 
+        if (ErrMsg.fatal == false) {
+            ((ASTnode)root.value).unparse(outFile, 0);
+        }
         outFile.close();
 
         return;

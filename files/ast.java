@@ -108,7 +108,7 @@ import java.util.*;
 abstract class ASTnode { 
     // every subclass must provide an unparse operation
     abstract public void unparse(PrintWriter p, int indent);
-
+    
     // this method can be used by the unparse methods to do indenting
     protected void doIndent(PrintWriter p, int indent) {
         for (int k=0; k<indent; k++) p.print(" ");
@@ -724,7 +724,7 @@ class IdNode extends ExpNode {
         myLineNum = lineNum;
         myCharNum = charNum;
         myStrVal = strVal;
-        myType = "void";
+        myType = "";
         mySym = null;
     }
 
@@ -783,7 +783,9 @@ class DotAccessExpNode extends ExpNode {
 		myLoc.unparse(p, 0);
 		p.print(").");
         myId.unparse(p, 0);
+        ///
         p.print("(" + myId.myType + ")");
+        ///
     }
 
     // 2 kids
@@ -824,7 +826,9 @@ class CallExpNode extends ExpNode {
     // ** unparse **
     public void unparse(PrintWriter p, int indent) {
         myId.unparse(p, 0);
+        ///
         p.print("(" + myId.myType + ")");
+        ///
 		p.print("(");
 		if (myExpList != null) {
 			myExpList.unparse(p, 0);
