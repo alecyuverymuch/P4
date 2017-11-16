@@ -452,7 +452,7 @@ class StructNode extends TypeNode {
     public void nameAnalysis(SymTable symTab){}
 
     public String getType() {
-        return myId.;
+        return myId.getName();
     }
 
     public IdNode getId() {
