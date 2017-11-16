@@ -191,7 +191,12 @@ class FormalsListNode extends ASTnode {
         return paramTypes;
     }
 
-    public void nameAnalysis(SymTable symTab){}
+    public void nameAnalysis(SymTable symTab){
+        Iterator<FormalDeclNode> it = myFormals.iterator();
+        while (it.hasNext()) { // if there is at least one element
+            it.next().nameAnalysis(symTab);
+        } 
+    }
 
     public void unparse(PrintWriter p, int indent) {
         Iterator<FormalDeclNode> it = myFormals.iterator();
@@ -214,7 +219,10 @@ class FnBodyNode extends ASTnode {
         myStmtList = stmtList;
     }
 
-    public void nameAnalysis(SymTable symTab){}
+    public void nameAnalysis(SymTable symTab){
+        myDeclList.nameAnalysis(symTab);
+        myStmtList.nameAnalysis(symTab);
+    }
 
     public void unparse(PrintWriter p, int indent) {
         myDeclList.unparse(p, indent);
@@ -231,7 +239,12 @@ class StmtListNode extends ASTnode {
         myStmts = S;
     }
 
-    public void nameAnalysis(SymTable symTab){}
+    public void nameAnalysis(SymTable symTab){
+        Iterator<StmtNode> it = myStmts.iterator();
+        while (it.hasNext()) {
+            it.next().nameAnalysis(symTab);
+        }
+    }
 
     public void unparse(PrintWriter p, int indent) {
         Iterator<StmtNode> it = myStmts.iterator();
@@ -249,7 +262,12 @@ class ExpListNode extends ASTnode {
         myExps = S;
     }
 
-    public void nameAnalysis(SymTable symTab){}
+    public void nameAnalysis(SymTable symTab){
+        Iterator<ExpNode> it = myExps.iterator();
+        while (it.hasNext()) {
+            it.next().nameAnalysis(symTab);
+        }
+    }
 
     public void unparse(PrintWriter p, int indent) {
         Iterator<ExpNode> it = myExps.iterator();
@@ -351,7 +369,8 @@ class FormalDeclNode extends DeclNode {
     }
 
     public void nameAnalysis(SymTable symTab){
-
+        SemSym sym = new SemSym(myId.getName, myType.getType());
+        symTab.addDecl(sym);
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -478,7 +497,9 @@ class AssignStmtNode extends StmtNode {
         myAssign = assign;
     }
 
-    public void nameAnalysis(SymTable symTab){}
+    public void nameAnalysis(SymTable symTab){
+        //myAssign.nameAnalysis(symTab);
+    }
 
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
@@ -495,7 +516,9 @@ class PostIncStmtNode extends StmtNode {
         myExp = exp;
     }
 
-    public void nameAnalysis(SymTable symTab){}
+    public void nameAnalysis(SymTable symTab){
+        //myExp.nameAnalysis(symTab);
+    }
 
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
