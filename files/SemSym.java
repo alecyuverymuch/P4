@@ -29,6 +29,10 @@ public class SemSym {
     public String getType() {
         return type;
     }
+
+    public boolean isFunc(){
+        return isFunc;
+    }
     
     public String toString() {
         return type;
