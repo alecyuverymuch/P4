@@ -111,7 +111,7 @@ abstract class ASTnode {
     abstract public void unparse(PrintWriter p, int indent);
 
     abstract public void nameAnalysis(SymTable symTab);
-    
+
     protected void setSymTable(SymTable symTab) {
         symTable = symTab;
     }
@@ -937,12 +937,29 @@ class IdNode extends ExpNode {
     }
 
     public void unparseCall(PrintWriter p, int indent) {
-        SemSym sym = symTable.lookupGlobal(myStrVal);
-        if (sym.isFunc()) {
-            List<String> types = sym.getParamTypes();
-            returnType = sym.getReturnType();
+        // SemSym sym = symTable.lookupGlobal(myStrVal);
+        // if (sym.isFunc()) {
+        //     List<String> types = sym.getParamTypes();
+        //     returnType = sym.getReturnType();
+        //     p.print("(");
+        //     Iterator<String> it = types.iterator();
+        //     if (it.hasNext()) { // if there is at least one element
+        //         p.print(it.next());
+        //         while (it.hasNext()) {  // print the rest of the list
+        //             p.print(", ");
+        //             p.print(it.next());
+        //         }
+        //     }
+        //     p.print("->" + returnType + ")");
+        // }
+        // else {
+        //     String type = sym.getType();
+        //     unparse(p, indent);
+        //     p.print("(" + type + ")");
+        // }
+        if (isFunc) {
             p.print("(");
-            Iterator<String> it = types.iterator();
+            Iterator<String> it = paramTypes.iterator();
             if (it.hasNext()) { // if there is at least one element
                 p.print(it.next());
                 while (it.hasNext()) {  // print the rest of the list
@@ -955,7 +972,7 @@ class IdNode extends ExpNode {
         else {
             String type = sym.getType();
             unparse(p, indent);
-            p.print("(" + type + ")");
+            p.print("(" + myType + ")");
         }
     }
 
