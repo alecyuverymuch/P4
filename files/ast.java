@@ -724,6 +724,7 @@ class IdNode extends ExpNode {
         myLineNum = lineNum;
         myCharNum = charNum;
         myStrVal = strVal;
+        myType = "void";
         mySym = null;
     }
 
@@ -732,6 +733,7 @@ class IdNode extends ExpNode {
             if (type.equals("void")) {
                 ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
             }
+            myType = type;
             mySym = new SemSym(myStrVal, type);
             symTab.addDecl(myStrVal, mySym);
         } catch (DuplicateSymException e) {
@@ -765,7 +767,9 @@ class IdNode extends ExpNode {
     private int myLineNum;
     private int myCharNum;
     private String myStrVal;
+    public String myType;
     public SemSym mySym;
+
 }
 
 class DotAccessExpNode extends ExpNode {
@@ -778,7 +782,8 @@ class DotAccessExpNode extends ExpNode {
 	    p.print("(");
 		myLoc.unparse(p, 0);
 		p.print(").");
-		myId.unparse(p, 0);
+        myId.unparse(p, 0);
+        p.print("(" + myId.myType + ")");
     }
 
     // 2 kids
@@ -818,7 +823,8 @@ class CallExpNode extends ExpNode {
 
     // ** unparse **
     public void unparse(PrintWriter p, int indent) {
-	    myId.unparse(p, 0);
+        myId.unparse(p, 0);
+        p.print("(" + myId.myType + ")");
 		p.print("(");
 		if (myExpList != null) {
 			myExpList.unparse(p, 0);
