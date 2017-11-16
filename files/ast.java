@@ -369,14 +369,8 @@ class FormalDeclNode extends DeclNode {
     }
 
     public void nameAnalysis(SymTable symTab){
-        try {
-            SemSym sym = new SemSym(myId.getName(), myType.getType());
-            symTab.addDecl(myId.getName(), sym);
-        } catch (DuplicateSymException e) {
-            ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
-        } catch (EmptySymTableException e) {
-            //TODO maybe to do with scopes?
-        }
+        myId.setFunc(myType.getType());
+        myId.nameAnalysis(symTab);
     }
 
     public void unparse(PrintWriter p, int indent) {
