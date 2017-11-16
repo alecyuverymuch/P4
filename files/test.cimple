@@ -117,7 +117,7 @@ bool func16(bool b){
     x = "hello" + "string"; 
 }
 // Tests nested statements
-bool func11(bool b){
+bool func17(bool b){
     int x; 
     while(true || false && true){
         if(true){
