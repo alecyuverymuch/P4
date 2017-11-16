@@ -3,7 +3,7 @@ import java.util.*;
 public class SemSym {
     private String name;
     private String type;
-    private boolean function;
+    private boolean isFunc;
     private int params;
     private List<String> paramTypes;
     private String returnType;
@@ -11,11 +11,11 @@ public class SemSym {
     public SemSym(String name, String type) {
         this.name = name;
         this.type = type;
-        function = false;
+        isFunc = false;
     }
 
     public SemSym(String name, String returnType, int params, List<String> paramTypes){
-        function = true;
+        isFunc = true;
         this.name = name;
         this.returnType = returnType;
         this.params = params;
