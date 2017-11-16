@@ -109,7 +109,7 @@ abstract class ASTnode {
     // every subclass must provide an unparse operation
     abstract public void unparse(PrintWriter p, int indent);
 
-    abstract public void nameAnalysis(SymTable symTab)
+    abstract public void nameAnalysis(SymTable symTab);
     // this method can be used by the unparse methods to do indenting
     protected void doIndent(PrintWriter p, int indent) {
         for (int k=0; k<indent; k++) p.print(" ");
