@@ -337,6 +337,8 @@ class FnDeclNode extends DeclNode {
         int params = paramTypes.size();
         myId.setFunc(returnType, params, paramTypes);
         myId.nameAnalysis(symTab);
+        myFormalsList.nameAnalysis(symTab);
+        myBody.nameAnalysis(symTab);
     }
 
     public void unparse(PrintWriter p, int indent) {
