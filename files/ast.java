@@ -108,7 +108,8 @@ import java.util.*;
 abstract class ASTnode { 
     // every subclass must provide an unparse operation
     abstract public void unparse(PrintWriter p, int indent);
-    
+
+    abstract public void nameAnalysis(SymTable symTab)
     // this method can be used by the unparse methods to do indenting
     protected void doIndent(PrintWriter p, int indent) {
         for (int k=0; k<indent; k++) p.print(" ");
@@ -130,8 +131,7 @@ class ProgramNode extends ASTnode {
      * Creates an empty symbol table for the outermost scope, then processes
      * all of the globals, struct defintions, and functions in the program.
      */
-    public void nameAnalysis() {
-        SymTable symTab = new SymTable();
+    public void nameAnalysis(SymTable symTable) {
         myDeclList.nameAnalysis(symTab);
 	// TODO: Add code here 
     }
@@ -191,6 +191,8 @@ class FormalsListNode extends ASTnode {
         return paramTypes;
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
         Iterator<FormalDeclNode> it = myFormals.iterator();
         if (it.hasNext()) { // if there is at least one element
@@ -212,6 +214,8 @@ class FnBodyNode extends ASTnode {
         myStmtList = stmtList;
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
         myDeclList.unparse(p, indent);
         myStmtList.unparse(p, indent);
@@ -226,6 +230,8 @@ class StmtListNode extends ASTnode {
     public StmtListNode(List<StmtNode> S) {
         myStmts = S;
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
         Iterator<StmtNode> it = myStmts.iterator();
@@ -242,6 +248,8 @@ class ExpListNode extends ASTnode {
     public ExpListNode(List<ExpNode> S) {
         myExps = S;
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
         Iterator<ExpNode> it = myExps.iterator();
@@ -399,6 +407,8 @@ class IntNode extends TypeNode {
         return "int";
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
         p.print("int");
     }
@@ -412,6 +422,8 @@ class BoolNode extends TypeNode {
         return "bool";
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
         p.print("bool");
     }
@@ -420,6 +432,8 @@ class BoolNode extends TypeNode {
 class VoidNode extends TypeNode {
     public VoidNode() {
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public String getType() {
         return "void";
@@ -434,6 +448,8 @@ class StructNode extends TypeNode {
     public StructNode(IdNode id) {
         myId = id;
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public String getType() {
         return "struct";
@@ -462,6 +478,8 @@ class AssignStmtNode extends StmtNode {
         myAssign = assign;
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
         myAssign.unparse(p, -1); // no parentheses
@@ -476,6 +494,8 @@ class PostIncStmtNode extends StmtNode {
     public PostIncStmtNode(ExpNode exp) {
         myExp = exp;
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
@@ -492,6 +512,8 @@ class PostDecStmtNode extends StmtNode {
         myExp = exp;
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
         myExp.unparse(p, 0);
@@ -506,6 +528,8 @@ class ReadStmtNode extends StmtNode {
     public ReadStmtNode(ExpNode e) {
         myExp = e;
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
@@ -522,6 +546,8 @@ class WriteStmtNode extends StmtNode {
     public WriteStmtNode(ExpNode exp) {
         myExp = exp;
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
@@ -540,6 +566,8 @@ class IfStmtNode extends StmtNode {
         myExp = exp;
         myStmtList = slist;
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
@@ -568,6 +596,8 @@ class IfElseStmtNode extends StmtNode {
         myElseDeclList = dlist2;
         myElseStmtList = slist2;
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
@@ -600,6 +630,8 @@ class WhileStmtNode extends StmtNode {
         myDeclList = dlist;
         myStmtList = slist;
     }
+
+    public void nameAnalysis(SymTable symTab){}
 	
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
@@ -623,6 +655,8 @@ class CallStmtNode extends StmtNode {
         myCall = call;
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
         myCall.unparse(p, indent);
@@ -637,6 +671,8 @@ class ReturnStmtNode extends StmtNode {
     public ReturnStmtNode(ExpNode exp) {
         myExp = exp;
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
@@ -666,6 +702,8 @@ class IntLitNode extends ExpNode {
         myIntVal = intVal;
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
         p.print(myIntVal);
     }
@@ -682,6 +720,8 @@ class StringLitNode extends ExpNode {
         myStrVal = strVal;
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
         p.print(myStrVal);
     }
@@ -697,6 +737,8 @@ class TrueNode extends ExpNode {
         myCharNum = charNum;
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
         p.print("true");
     }
@@ -710,6 +752,8 @@ class FalseNode extends ExpNode {
         myLineNum = lineNum;
         myCharNum = charNum;
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
         p.print("false");
@@ -727,6 +771,8 @@ class IdNode extends ExpNode {
         myType = "";
         mySym = null;
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void nameAnalysisVarDecl(SymTable symTab, String type) {
         try {
@@ -778,6 +824,8 @@ class DotAccessExpNode extends ExpNode {
         myId = id;
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		myLoc.unparse(p, 0);
@@ -798,6 +846,8 @@ class AssignNode extends ExpNode {
         myLhs = lhs;
         myExp = exp;
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
 		if (indent != -1)  p.print("(");
@@ -822,6 +872,8 @@ class CallExpNode extends ExpNode {
         myId = name;
         myExpList = new ExpListNode(new LinkedList<ExpNode>());
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     // ** unparse **
     public void unparse(PrintWriter p, int indent) {
@@ -870,6 +922,8 @@ class UnaryMinusNode extends UnaryExpNode {
         super(exp);
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(-");
 		myExp.unparse(p, 0);
@@ -881,6 +935,8 @@ class NotNode extends UnaryExpNode {
     public NotNode(ExpNode exp) {
         super(exp);
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(!");
@@ -898,6 +954,8 @@ class PlusNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		myExp1.unparse(p, 0);
@@ -911,6 +969,8 @@ class MinusNode extends BinaryExpNode {
     public MinusNode(ExpNode exp1, ExpNode exp2) {
         super(exp1, exp2);
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
@@ -926,6 +986,8 @@ class TimesNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		myExp1.unparse(p, 0);
@@ -939,6 +1001,8 @@ class DivideNode extends BinaryExpNode {
     public DivideNode(ExpNode exp1, ExpNode exp2) {
         super(exp1, exp2);
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
@@ -954,6 +1018,8 @@ class AndNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		myExp1.unparse(p, 0);
@@ -967,6 +1033,8 @@ class OrNode extends BinaryExpNode {
     public OrNode(ExpNode exp1, ExpNode exp2) {
         super(exp1, exp2);
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
@@ -982,6 +1050,8 @@ class EqualsNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		myExp1.unparse(p, 0);
@@ -995,6 +1065,8 @@ class NotEqualsNode extends BinaryExpNode {
     public NotEqualsNode(ExpNode exp1, ExpNode exp2) {
         super(exp1, exp2);
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
@@ -1010,6 +1082,8 @@ class LessNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		myExp1.unparse(p, 0);
@@ -1023,6 +1097,8 @@ class GreaterNode extends BinaryExpNode {
     public GreaterNode(ExpNode exp1, ExpNode exp2) {
         super(exp1, exp2);
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
@@ -1038,6 +1114,8 @@ class LessEqNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
+    public void nameAnalysis(SymTable symTab){}
+
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		myExp1.unparse(p, 0);
@@ -1051,6 +1129,8 @@ class GreaterEqNode extends BinaryExpNode {
     public GreaterEqNode(ExpNode exp1, ExpNode exp2) {
         super(exp1, exp2);
     }
+
+    public void nameAnalysis(SymTable symTab){}
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");

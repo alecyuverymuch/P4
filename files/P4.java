@@ -58,6 +58,7 @@ public class P4 {
         if (ErrMsg.fatal == false) {
             ((ASTnode)root.value).nameAnalysis();
         } 
+        SymTable symTable = new SymTable();
         if (ErrMsg.fatal == false) {
             ((ASTnode)root.value).unparse(outFile, 0);
         }
