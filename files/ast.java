@@ -359,8 +359,10 @@ class FnDeclNode extends DeclNode {
         doIndent(p, indent);
         myType.unparse(p, 0);
         p.print(" ");
-        String type = myType.getType();
-        myId.setVar(type);
+        String returnType = myType.getType();
+        LinkedList<String> paramTypes = myFormalsList.getParamTypes();
+        int params = paramTypes.size();
+        myId.setFunc(returnType, params, paramTypes);
         myId.unparse(p, 0);
         p.print("(");
         myFormalsList.unparse(p, 0);
@@ -417,8 +419,6 @@ class StructDeclNode extends DeclNode {
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
         p.print("struct ");
-        String type = myType.getType();
-        myId.setVar(type);
 		myId.unparse(p, 0);
 		p.println("{");
         myDeclList.unparse(p, indent+4);
@@ -502,8 +502,6 @@ class StructNode extends TypeNode {
 
     public void unparse(PrintWriter p, int indent) {
         p.print("struct ");
-        String type = myType.getType();
-        myId.setVar(type);
 		myId.unparse(p, 0);
     }
     private IdNode myId;
@@ -1015,13 +1013,9 @@ class DotAccessExpNode extends ExpNode {
         }
 		p.print(").");
         if (myId instanceof IdNode) {
-            String type = myType.getType();
-            myId.setVar(type);
             myId.unparseCall(p, 0);
         }
         else {
-            String type = myType.getType();
-            myId.setVar(type);
             myId.unparse(p, 0);
         }
     }
@@ -1079,16 +1073,12 @@ class CallExpNode extends ExpNode {
 
     // ** unparse **
     public void unparse(PrintWriter p, int indent) {
-        String type = myType.getType();
-        myId.setVar(type);
         myId.unparse(p, 0);
 		p.print("(");
 		if (myExpList != null) {
 			myExpList.unparse(p, 0);
 		}
         p.print(")");
-        String type = myType.getType();
-        myId.setVar(type);
         myId.unparseCall(p, 0);
     }
 
