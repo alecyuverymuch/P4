@@ -282,7 +282,8 @@ class VarDeclNode extends DeclNode {
 
     public void nameAnalysis(SymTable symTab) {
         String type = myType.getType();
-        myId.nameAnalysisVarDecl(symTab, type);
+        myId.setVar(type);
+        myId.nameAnalysis(symTab);
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -316,8 +317,8 @@ class FnDeclNode extends DeclNode {
         String returnType = myType.getType();
         LinkedList<String> paramTypes = myFormalsList.getParamTypes();
         int params = paramTypes.size();
-
-        myId.nameAnalysisFnDecl(symTab, returnType, params, paramTypes);
+        myId.setFunc(returnType, params, paramTypes)
+        myId.nameAnalysis(symTab);
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -768,51 +769,73 @@ class IdNode extends ExpNode {
         myCharNum = charNum;
         myStrVal = strVal;
         myType = "";
+        isFunc = false;
+        returnType = "";
+        params = 0;
+        paramTypes = null;
         mySym = null;
     }
 
-    public void nameAnalysis(SymTable symTab){}
-
-    public void nameAnalysisVarDecl(SymTable symTab, String type) {
-        try {
-            if (type.equals("void")) {
-                ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
-            }
-            myType = type;
-            mySym = new SemSym(myStrVal, type);
-            symTab.addDecl(myStrVal, mySym);
-        } catch (DuplicateSymException e) {
-            ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
-        } catch (EmptySymTableException e) {
-            //TODO maybe to do with scopes?
-        }
+    public void setVar(String type){
+        myType = type;
     }
 
-    public void nameAnalysisFnDecl(SymTable symTab, String returnType, int params, LinkedList<String> paramTypes) {
-        try {
-            Iterator<String> it = paramTypes.iterator();
-            while(it.hasNext()) {
-                if (it.next().equals("void")) {
+    public void setFunc(String returnType, int params, LinkedList<String> paramTypes){
+        isFunc = true;
+        this.returnType = returnType;
+        this.params = params;
+        this.paramTypes = paramTypes;
+    }
+
+    public void nameAnalysis(SymTable symTab){
+        if (isFunc) {
+            // For function declarations
+            try {
+                Iterator<String> it = paramTypes.iterator();
+                while(it.hasNext()) {
+                    if (it.next().equals("void")) {
+                        ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
+                    }
+                }
+                mySym = new SemSym(myStrVal, returnType, params, paramTypes);
+                symTab.addDecl(myStrVal, mySym);
+            } catch (DuplicateSymException e) {
+                ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
+            } catch (EmptySymTableException e) {
+                //TODO maybe to do with scopes?
+            }
+        }
+        else {
+            // For variable declarations
+            try {
+                if (type.equals("void")) {
                     ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
                 }
+                myType = type;
+                mySym = new SemSym(myStrVal, type);
+                symTab.addDecl(myStrVal, mySym);
+            } catch (DuplicateSymException e) {
+                ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
+            } catch (EmptySymTableException e) {
+                //TODO maybe to do with scopes?
             }
-            mySym = new SemSym(myStrVal, returnType, params, paramTypes);
-            symTab.addDecl(myStrVal, mySym);
-        } catch (DuplicateSymException e) {
-            ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
-        } catch (EmptySymTableException e) {
-            //TODO maybe to do with scopes?
         }
     }
 
     public void unparse(PrintWriter p, int indent) {
         p.print(myStrVal);
+        if (!isFunc) {
+            p.print("(" + myType + ")");
+        }
     }
 
     private int myLineNum;
     private int myCharNum;
     private String myStrVal;
     public String myType;
+    public boolean isFunc;
+    public int params;
+    public LinkedList<String> paramTypes;
     public SemSym mySym;
 
 }
@@ -830,9 +853,6 @@ class DotAccessExpNode extends ExpNode {
 		myLoc.unparse(p, 0);
 		p.print(").");
         myId.unparse(p, 0);
-        ///
-        p.print("(" + myId.myType + ")");
-        ///
     }
 
     // 2 kids
@@ -877,9 +897,6 @@ class CallExpNode extends ExpNode {
     // ** unparse **
     public void unparse(PrintWriter p, int indent) {
         myId.unparse(p, 0);
-        ///
-        p.print("(" + myId.myType + ")");
-        ///
 		p.print("(");
 		if (myExpList != null) {
 			myExpList.unparse(p, 0);
