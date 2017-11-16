@@ -933,7 +933,7 @@ class IdNode extends ExpNode {
     }
 
     public void unparseCall(PrintWriter p, int indent) {
-        SemSym sym = symTable.localSearch(myStrVal);
+        SemSym sym = symTable.lookupLocal(myStrVal);
         if (sym.isFunc()) {
             paramTypes = sym.getParamTypes();
             returnType = sym.getReturnType();
