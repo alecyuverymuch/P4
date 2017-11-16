@@ -342,7 +342,7 @@ class FnDeclNode extends DeclNode {
         myBody.nameAnalysis(symTab);
         try {
             symTab.removeScope();
-        } catch (EmptyTableException e) {
+        } catch (EmptySymTableException e) {
 
         }
     }
@@ -624,7 +624,7 @@ class IfStmtNode extends StmtNode {
         myDeclList.nameAnalysis(symTab);
         try {
             symTab.removeScope();
-        } catch (EmptyTableException e) {
+        } catch (EmptySymTableException e) {
             
         }
     }
@@ -668,7 +668,7 @@ class IfElseStmtNode extends StmtNode {
         myElseDeclList.nameAnalysis(symTab);
         try {
             symTab.removeScope();
-        } catch (EmptyTableException e) {
+        } catch (EmptySymTableException e) {
             
         }
     }
@@ -715,7 +715,7 @@ class WhileStmtNode extends StmtNode {
         myDeclList.nameAnalysis(symTab);
         try {
             symTab.removeScope();
-        } catch (EmptyTableException e) {
+        } catch (EmptySymTableException e) {
             
         }
     }
