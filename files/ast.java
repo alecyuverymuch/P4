@@ -335,9 +335,9 @@ class FnDeclNode extends DeclNode {
         String returnType = myType.getType();
         LinkedList<String> paramTypes = myFormalsList.getParamTypes();
         int params = paramTypes.size();
-        symTab.addScope();
         myId.setFunc(returnType, params, paramTypes);
         myId.nameAnalysis(symTab);
+        symTab.addScope();
         myFormalsList.nameAnalysis(symTab);
         myBody.nameAnalysis(symTab);
         try {
