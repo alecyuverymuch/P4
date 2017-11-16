@@ -335,10 +335,12 @@ class FnDeclNode extends DeclNode {
         String returnType = myType.getType();
         LinkedList<String> paramTypes = myFormalsList.getParamTypes();
         int params = paramTypes.size();
+        symTab.addScope();
         myId.setFunc(returnType, params, paramTypes);
         myId.nameAnalysis(symTab);
         myFormalsList.nameAnalysis(symTab);
         myBody.nameAnalysis(symTab);
+        symTab.removeScope();
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -614,6 +616,9 @@ class IfStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(SymTable symTab){
+        symTab.addScope();
+        myDeclList.nameAnalysis(symTab);
+        symTab.removeScope();
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -650,6 +655,10 @@ class IfElseStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(SymTable symTab){
+        symTab.addScope();
+        myThenDeclList.nameAnalysis(symTab);
+        myElseDeclList.nameAnalysis(symTab);
+        symTab.removeScope();
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -690,6 +699,9 @@ class WhileStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(SymTable symTab){
+        symTab.addScope();
+        myDeclList.nameAnalysis(symTab);
+        symTab.removeScope();
     }
 	
     public void unparse(PrintWriter p, int indent) {
