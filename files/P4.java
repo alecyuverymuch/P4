@@ -60,9 +60,9 @@ public class P4 {
             ((ASTnode)root.value).nameAnalysis(symTable);
         }
         symTable.print();
-        if (ErrMsg.fatal == false) {
+        //if (ErrMsg.fatal == false) {
             ((ASTnode)root.value).unparse(outFile, 0);
-        }
+        //}
         outFile.close();
 
         return;
