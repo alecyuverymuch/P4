@@ -106,6 +106,7 @@ import java.util.*;
 // **********************************************************************
 
 abstract class ASTnode { 
+    public SymTable symTable;
     // every subclass must provide an unparse operation
     abstract public void unparse(PrintWriter p, int indent);
 
@@ -131,8 +132,9 @@ class ProgramNode extends ASTnode {
      * Creates an empty symbol table for the outermost scope, then processes
      * all of the globals, struct defintions, and functions in the program.
      */
-    public void nameAnalysis(SymTable symTable) {
-        myDeclList.nameAnalysis(symTable);
+    public void nameAnalysis(SymTable symTab) {
+        symTable = symTab;
+        myDeclList.nameAnalysis(symTab);
 	// TODO: Add code here 
     }
 
@@ -931,8 +933,10 @@ class IdNode extends ExpNode {
     }
 
     public void unparseCall(PrintWriter p, int indent) {
-        SemSym sym = symTab.localSearch(myStrVal);
+        SemSym sym = symTable.localSearch(myStrVal);
         if (sym.isFunc()) {
+            paramTypes = sym.getParamTypes();
+            returnType = sym.getReturnType();
             p.print("(");
             Iterator<String> it = paramTypes.iterator();
             if (it.hasNext()) { // if there is at least one element

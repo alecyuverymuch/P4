@@ -30,6 +30,14 @@ public class SemSym {
         return type;
     }
 
+    public String getReturnType(){
+        return returnType;
+    }
+
+    public List<String> getParamTypes(){
+        return paramTypes;
+    }
+
     public boolean isFunc(){
         return isFunc;
     }
