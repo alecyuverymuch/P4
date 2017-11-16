@@ -970,7 +970,6 @@ class IdNode extends ExpNode {
             p.print("->" + returnType + ")");
         }
         else {
-            String type = sym.getType();
             unparse(p, indent);
             p.print("(" + myType + ")");
         }
