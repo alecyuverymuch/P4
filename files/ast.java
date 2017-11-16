@@ -369,7 +369,7 @@ class FormalDeclNode extends DeclNode {
     }
 
     public void nameAnalysis(SymTable symTab){
-        myId.setFunc(myType.getType());
+        myId.setVar(myType.getType());
         myId.nameAnalysis(symTab);
     }
 
