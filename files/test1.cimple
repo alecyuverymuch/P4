@@ -1,0 +1,14 @@
+int a;
+bool b;
+struct c {
+    int d;
+    bool e;
+};
+struct f g;
+void h(){
+}
+int i(int j, bool k){
+    int l;
+    l = 4;
+    return l;
+}
