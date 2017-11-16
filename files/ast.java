@@ -515,12 +515,16 @@ class PostIncStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(SymTable symTab){
-        myExp.nameAnalysis(symTab);
     }
 
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
-        myExp.unparse(p, 0);
+        if (myExp instanceof IdNode) {
+            ((IdNode)myExp).unparseCall(p, 0);
+        }
+        else {
+            myExp.unparse(p, 0);
+        }
         p.println("++;");
     }
 
@@ -538,7 +542,12 @@ class PostDecStmtNode extends StmtNode {
 
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
-        myExp.unparse(p, 0);
+        if (myExp instanceof IdNode) {
+            ((IdNode)myExp).unparseCall(p, 0);
+        }
+        else {
+            myExp.unparse(p, 0);
+        }
         p.println("--;");
     }
 
@@ -557,7 +566,12 @@ class ReadStmtNode extends StmtNode {
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
         p.print("cin >> ");
-        myExp.unparse(p, 0);
+        if (myExp instanceof IdNode) {
+            ((IdNode)myExp).unparseCall(p, 0);
+        }
+        else {
+            myExp.unparse(p, 0);
+        }
         p.println(";");
     }
 
@@ -576,7 +590,12 @@ class WriteStmtNode extends StmtNode {
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
         p.print("cout << ");
-        myExp.unparse(p, 0);
+        if (myExp instanceof IdNode) {
+            ((IdNode)myExp).unparseCall(p, 0);
+        }
+        else {
+            myExp.unparse(p, 0);
+        }
         p.println(";");
     }
 
@@ -597,7 +616,12 @@ class IfStmtNode extends StmtNode {
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
         p.print("if (");
-        myExp.unparse(p, 0);
+        if (myExp instanceof IdNode) {
+            ((IdNode)myExp).unparseCall(p, 0);
+        }
+        else {
+            myExp.unparse(p, 0);
+        }
         p.println(") {");
         myDeclList.unparse(p, indent+4);
         myStmtList.unparse(p, indent+4);
@@ -628,7 +652,12 @@ class IfElseStmtNode extends StmtNode {
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
         p.print("if (");
-        myExp.unparse(p, 0);
+        if (myExp instanceof IdNode) {
+            ((IdNode)myExp).unparseCall(p, 0);
+        }
+        else {
+            myExp.unparse(p, 0);
+        }
         p.println(") {");
         myThenDeclList.unparse(p, indent+4);
         myThenStmtList.unparse(p, indent+4);
@@ -663,7 +692,12 @@ class WhileStmtNode extends StmtNode {
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
         p.print("while (");
-        myExp.unparse(p, 0);
+        if (myExp instanceof IdNode) {
+            ((IdNode)myExp).unparseCall(p, 0);
+        }
+        else {
+            myExp.unparse(p, 0);
+        }
         p.println(") {");
         myDeclList.unparse(p, indent+4);
         myStmtList.unparse(p, indent+4);
@@ -710,7 +744,12 @@ class ReturnStmtNode extends StmtNode {
         p.print("return");
         if (myExp != null) {
             p.print(" ");
-            myExp.unparse(p, 0);
+            if (myExp instanceof IdNode) {
+                ((IdNode)myExp).unparseCall(p, 0);
+            }
+            else {
+                myExp.unparse(p, 0);
+            }
         }
         p.println(";");
     }
