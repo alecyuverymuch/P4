@@ -778,6 +778,7 @@ class IdNode extends ExpNode {
             if (type.equals("void")) {
                 ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
             }
+            myType = type;
             mySym = new SemSym(myStrVal, type);
             symTab.addDecl(myStrVal, mySym);
         } catch (DuplicateSymException e) {
@@ -795,7 +796,6 @@ class IdNode extends ExpNode {
                     ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
                 }
             }
-            myType = type;
             mySym = new SemSym(myStrVal, returnType, params, paramTypes);
             symTab.addDecl(myStrVal, mySym);
         } catch (DuplicateSymException e) {
