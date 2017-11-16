@@ -512,6 +512,7 @@ class AssignStmtNode extends StmtNode {
 
 class PostIncStmtNode extends StmtNode {
     public PostIncStmtNode(ExpNode exp) {
+        myExp = exp;
     }
 
     public void nameAnalysis(SymTable symTab){
