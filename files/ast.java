@@ -932,7 +932,6 @@ class IdNode extends ExpNode {
 
     public void unparseCall(PrintWriter p, int indent) {
         if (isFunc) {
-            unparse(p, indent);
             p.print("(");
             Iterator<String> it = paramTypes.iterator();
             if (it.hasNext()) { // if there is at least one element
@@ -1034,7 +1033,9 @@ class CallExpNode extends ExpNode {
         myExpList = new ExpListNode(new LinkedList<ExpNode>());
     }
 
-    public void nameAnalysis(SymTable symTab){}
+    public void nameAnalysis(SymTable symTab){
+
+    }
 
     // ** unparse **
     public void unparse(PrintWriter p, int indent) {
@@ -1043,7 +1044,8 @@ class CallExpNode extends ExpNode {
 		if (myExpList != null) {
 			myExpList.unparse(p, 0);
 		}
-		p.print(")");
+        p.print(")");
+        myId.unparseCall(p, 0);
     }
 
     // 2 kids
