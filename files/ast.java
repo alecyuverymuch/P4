@@ -337,7 +337,7 @@ class FnDeclNode extends DeclNode {
         int params = paramTypes.size();
         myId.setFunc(returnType, params, paramTypes);
         myId.nameAnalysis(symTab);
-        symTab.addScope();
+        //symTab.addScope();
         myFormalsList.nameAnalysis(symTab);
         myBody.nameAnalysis(symTab);
         // try {
@@ -620,7 +620,7 @@ class IfStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(SymTable symTab){
-        symTab.addScope();
+        //symTab.addScope();
         myDeclList.nameAnalysis(symTab);
         // try {
         //     symTab.removeScope();
@@ -663,7 +663,7 @@ class IfElseStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(SymTable symTab){
-        symTab.addScope();
+        //symTab.addScope();
         myThenDeclList.nameAnalysis(symTab);
         myElseDeclList.nameAnalysis(symTab);
         // try {
@@ -711,7 +711,7 @@ class WhileStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(SymTable symTab){
-        symTab.addScope();
+        //symTab.addScope();
         myDeclList.nameAnalysis(symTab);
         // try {
         //     symTab.removeScope();

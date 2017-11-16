@@ -12,3 +12,6 @@ int i(int j, bool k){
     l = 4;
     return l;
 }
+bool m(int n, bool o){
+    i(n,o);
+}
