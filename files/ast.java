@@ -132,7 +132,7 @@ class ProgramNode extends ASTnode {
      * all of the globals, struct defintions, and functions in the program.
      */
     public void nameAnalysis(SymTable symTable) {
-        myDeclList.nameAnalysis(symTab);
+        myDeclList.nameAnalysis(symTable);
 	// TODO: Add code here 
     }
 
