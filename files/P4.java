@@ -55,10 +55,10 @@ public class P4 {
             System.err.println("Exception occured during parse: " + ex);
             System.exit(-1);
         }
-        if (ErrMsg.fatal == false) {
-            ((ASTnode)root.value).nameAnalysis();
-        } 
         SymTable symTable = new SymTable();
+        if (ErrMsg.fatal == false) {
+            ((ASTnode)root.value).nameAnalysis(symTable);
+        }
         if (ErrMsg.fatal == false) {
             ((ASTnode)root.value).unparse(outFile, 0);
         }
