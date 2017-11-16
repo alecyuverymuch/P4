@@ -329,7 +329,7 @@ class FnDeclNode extends DeclNode {
         myFormalsList.unparse(p, 0);
         p.println(") {");
         myBody.unparse(p, indent+4);
-        p.println("}\n");
+        p.print("}\n");
     }
 
     // 4 kids
