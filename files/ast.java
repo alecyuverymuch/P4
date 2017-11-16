@@ -871,7 +871,7 @@ class DotAccessExpNode extends ExpNode {
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
         if (myLoc instanceof IdNode) {
-            myLoc.unparseCall(p, 0);
+            ((IdNode)myLoc).unparseCall(p, 0);
         }
         else {
             myLoc.unparse(p, 0);
@@ -901,14 +901,14 @@ class AssignNode extends ExpNode {
     public void unparse(PrintWriter p, int indent) {
 		if (indent != -1)  p.print("(");
 	    if (myLhs instanceof IdNode) {
-            myLhs.unparseCall(p, 0);
+            ((IdNode)myLhs).unparseCall(p, 0);
         }
         else {
             myLhs.unparse(p, 0);
         }
 		p.print(" = ");
 		if (myExp instanceof IdNode) {
-            myExp.unparseCall(p, 0);
+            ((IdNode)myExp).unparseCall(p, 0);
         }
         else {
             myExp.unparse(p, 0);
@@ -983,7 +983,7 @@ class UnaryMinusNode extends UnaryExpNode {
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(-");
 		if (myExp instanceof IdNode) {
-            myExp.unparseCall(p, 0);
+            ((IdNode)myExp).unparseCall(p, 0);
         }
         else {
             myExp.unparse(p, 0);
@@ -1002,7 +1002,7 @@ class NotNode extends UnaryExpNode {
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(!");
 		if (myExp instanceof IdNode) {
-            myExp.unparseCall(p, 0);
+            ((IdNode)myExp).unparseCall(p, 0);
         }
         else {
             myExp.unparse(p, 0);
@@ -1025,14 +1025,14 @@ class PlusNode extends BinaryExpNode {
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		if (myExp1 instanceof IdNode) {
-            myExp1.unparseCall(p, 0);
+            ((IdNode)myExp1).unparseCall(p, 0);
         }
         else {
             myExp1.unparse(p, 0);
         }
 		p.print(" + ");
 		if (myExp2 instanceof IdNode) {
-            myExp2.unparseCall(p, 0);
+            ((IdNode)myExp2).unparseCall(p, 0);
         }
         else {
             myExp2.unparse(p, 0);
@@ -1051,14 +1051,14 @@ class MinusNode extends BinaryExpNode {
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		if (myExp1 instanceof IdNode) {
-            myExp1.unparseCall(p, 0);
+            ((IdNode)myExp1).unparseCall(p, 0);
         }
         else {
             myExp1.unparse(p, 0);
         }
 		p.print(" - ");
 		if (myExp2 instanceof IdNode) {
-            myExp2.unparseCall(p, 0);
+            ((IdNode)myExp2).unparseCall(p, 0);
         }
         else {
             myExp2.unparse(p, 0);
@@ -1077,14 +1077,14 @@ class TimesNode extends BinaryExpNode {
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		if (myExp1 instanceof IdNode) {
-            myExp1.unparseCall(p, 0);
+            ((IdNode)myExp1).unparseCall(p, 0);
         }
         else {
             myExp1.unparse(p, 0);
         }
 		p.print(" * ");
 		if (myExp2 instanceof IdNode) {
-            myExp2.unparseCall(p, 0);
+            ((IdNode)myExp2).unparseCall(p, 0);
         }
         else {
             myExp2.unparse(p, 0);
@@ -1103,14 +1103,14 @@ class DivideNode extends BinaryExpNode {
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		if (myExp1 instanceof IdNode) {
-            myExp1.unparseCall(p, 0);
+            ((IdNode)myExp1).unparseCall(p, 0);
         }
         else {
             myExp1.unparse(p, 0);
         }
 		p.print(" / ");
 		if (myExp2 instanceof IdNode) {
-            myExp2.unparseCall(p, 0);
+            ((IdNode)myExp2).unparseCall(p, 0);
         }
         else {
             myExp2.unparse(p, 0);
@@ -1129,14 +1129,14 @@ class AndNode extends BinaryExpNode {
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		if (myExp1 instanceof IdNode) {
-            myExp1.unparseCall(p, 0);
+            ((IdNode)myExp1).unparseCall(p, 0);
         }
         else {
             myExp1.unparse(p, 0);
         }
 		p.print(" && ");
 		if (myExp2 instanceof IdNode) {
-            myExp2.unparseCall(p, 0);
+            ((IdNode)myExp2).unparseCall(p, 0);
         }
         else {
             myExp2.unparse(p, 0);
@@ -1155,14 +1155,14 @@ class OrNode extends BinaryExpNode {
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		if (myExp1 instanceof IdNode) {
-            myExp1.unparseCall(p, 0);
+            ((IdNode)myExp1).unparseCall(p, 0);
         }
         else {
             myExp1.unparse(p, 0);
         }
 		p.print(" || ");
 		if (myExp2 instanceof IdNode) {
-            myExp2.unparseCall(p, 0);
+            ((IdNode)myExp2).unparseCall(p, 0);
         }
         else {
             myExp2.unparse(p, 0);
@@ -1181,14 +1181,14 @@ class EqualsNode extends BinaryExpNode {
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		if (myExp1 instanceof IdNode) {
-            myExp1.unparseCall(p, 0);
+            ((IdNode)myExp1).unparseCall(p, 0);
         }
         else {
             myExp1.unparse(p, 0);
         }
 		p.print(" == ");
 		if (myExp2 instanceof IdNode) {
-            myExp2.unparseCall(p, 0);
+            ((IdNode)myExp2).unparseCall(p, 0);
         }
         else {
             myExp2.unparse(p, 0);
@@ -1207,14 +1207,14 @@ class NotEqualsNode extends BinaryExpNode {
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		if (myExp1 instanceof IdNode) {
-            myExp1.unparseCall(p, 0);
+            ((IdNode)myExp1).unparseCall(p, 0);
         }
         else {
             myExp1.unparse(p, 0);
         }
 		p.print(" != ");
 		if (myExp2 instanceof IdNode) {
-            myExp2.unparseCall(p, 0);
+            ((IdNode)myExp2).unparseCall(p, 0);
         }
         else {
             myExp2.unparse(p, 0);
@@ -1233,14 +1233,14 @@ class LessNode extends BinaryExpNode {
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		if (myExp1 instanceof IdNode) {
-            myExp1.unparseCall(p, 0);
+            ((IdNode)myExp1).unparseCall(p, 0);
         }
         else {
             myExp1.unparse(p, 0);
         }
 		p.print(" < ");
 		if (myExp2 instanceof IdNode) {
-            myExp2.unparseCall(p, 0);
+            ((IdNode)myExp2).unparseCall(p, 0);
         }
         else {
             myExp2.unparse(p, 0);
@@ -1259,14 +1259,14 @@ class GreaterNode extends BinaryExpNode {
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		if (myExp1 instanceof IdNode) {
-            myExp1.unparseCall(p, 0);
+            ((IdNode)myExp1).unparseCall(p, 0);
         }
         else {
             myExp1.unparse(p, 0);
         }
 		p.print(" > ");
 		if (myExp2 instanceof IdNode) {
-            myExp2.unparseCall(p, 0);
+            ((IdNode)myExp2).unparseCall(p, 0);
         }
         else {
             myExp2.unparse(p, 0);
@@ -1285,14 +1285,14 @@ class LessEqNode extends BinaryExpNode {
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		if (myExp1 instanceof IdNode) {
-            myExp1.unparseCall(p, 0);
+            ((IdNode)myExp1).unparseCall(p, 0);
         }
         else {
             myExp1.unparse(p, 0);
         }
 		p.print(" <= ");
 		if (myExp2 instanceof IdNode) {
-            myExp2.unparseCall(p, 0);
+            ((IdNode)myExp2).unparseCall(p, 0);
         }
         else {
             myExp2.unparse(p, 0);
@@ -1311,14 +1311,14 @@ class GreaterEqNode extends BinaryExpNode {
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
 		if (myExp1 instanceof IdNode) {
-            myExp1.unparseCall(p, 0);
+            ((IdNode)myExp1).unparseCall(p, 0);
         }
         else {
             myExp1.unparse(p, 0);
         }
 		p.print(" >= ");
 		if (myExp2 instanceof IdNode) {
-            myExp2.unparseCall(p, 0);
+            ((IdNode)myExp2).unparseCall(p, 0);
         }
         else {
             myExp2.unparse(p, 0);
