@@ -835,10 +835,10 @@ class IdNode extends ExpNode {
             p.print("(");
             Iterator<String> it = paramTypes.iterator();
             if (it.hasNext()) { // if there is at least one element
-                it.next().unparse(p, indent);
+                p.print(it.next());
                 while (it.hasNext()) {  // print the rest of the list
                     p.print(", ");
-                    it.next().unparse(p, indent);
+                    p.print(it.next());
                 }
             }
             p.print("->" + returnType + ")");
