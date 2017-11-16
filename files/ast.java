@@ -808,11 +808,10 @@ class IdNode extends ExpNode {
         else {
             // For variable declarations
             try {
-                if (type.equals("void")) {
+                if (myType.equals("void")) {
                     ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
                 }
-                myType = type;
-                mySym = new SemSym(myStrVal, type);
+                mySym = new SemSym(myStrVal, myType);
                 symTab.addDecl(myStrVal, mySym);
             } catch (DuplicateSymException e) {
                 ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
@@ -834,6 +833,7 @@ class IdNode extends ExpNode {
     private String myStrVal;
     public String myType;
     public boolean isFunc;
+    public String returnType;
     public int params;
     public LinkedList<String> paramTypes;
     public SemSym mySym;
