@@ -340,7 +340,11 @@ class FnDeclNode extends DeclNode {
         myId.nameAnalysis(symTab);
         myFormalsList.nameAnalysis(symTab);
         myBody.nameAnalysis(symTab);
-        symTab.removeScope();
+        try {
+            symTab.removeScope();
+        } catch (EmptyTableException e) {
+
+        }
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -618,7 +622,11 @@ class IfStmtNode extends StmtNode {
     public void nameAnalysis(SymTable symTab){
         symTab.addScope();
         myDeclList.nameAnalysis(symTab);
-        symTab.removeScope();
+        try {
+            symTab.removeScope();
+        } catch (EmptyTableException e) {
+            
+        }
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -658,7 +666,11 @@ class IfElseStmtNode extends StmtNode {
         symTab.addScope();
         myThenDeclList.nameAnalysis(symTab);
         myElseDeclList.nameAnalysis(symTab);
-        symTab.removeScope();
+        try {
+            symTab.removeScope();
+        } catch (EmptyTableException e) {
+            
+        }
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -701,7 +713,11 @@ class WhileStmtNode extends StmtNode {
     public void nameAnalysis(SymTable symTab){
         symTab.addScope();
         myDeclList.nameAnalysis(symTab);
-        symTab.removeScope();
+        try {
+            symTab.removeScope();
+        } catch (EmptyTableException e) {
+            
+        }
     }
 	
     public void unparse(PrintWriter p, int indent) {
