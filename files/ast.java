@@ -935,10 +935,10 @@ class IdNode extends ExpNode {
     public void unparseCall(PrintWriter p, int indent) {
         SemSym sym = symTable.lookupLocal(myStrVal);
         if (sym.isFunc()) {
-            paramTypes = sym.getParamTypes();
+            List<String> types = sym.getParamTypes();
             returnType = sym.getReturnType();
             p.print("(");
-            Iterator<String> it = paramTypes.iterator();
+            Iterator<String> it = types.iterator();
             if (it.hasNext()) { // if there is at least one element
                 p.print(it.next());
                 while (it.hasNext()) {  // print the rest of the list
