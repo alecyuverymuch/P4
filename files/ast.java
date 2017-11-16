@@ -931,7 +931,8 @@ class IdNode extends ExpNode {
     }
 
     public void unparseCall(PrintWriter p, int indent) {
-        if (isFunc) {
+        SemSym sym = symTab.localSearch(myStrVal);
+        if (sym.isFunc()) {
             p.print("(");
             Iterator<String> it = paramTypes.iterator();
             if (it.hasNext()) { // if there is at least one element
@@ -944,8 +945,9 @@ class IdNode extends ExpNode {
             p.print("->" + returnType + ")");
         }
         else {
+            String type = sym.getType();
             unparse(p, indent);
-            p.print("(" + myType + ")");
+            p.print("(" + type + ")");
         }
     }
 
