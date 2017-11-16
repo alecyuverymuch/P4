@@ -381,7 +381,7 @@ class StructDeclNode extends DeclNode {
 		p.println("{");
         myDeclList.unparse(p, indent+4);
         doIndent(p, indent);
-        p.println("};\n");
+        p.print("};\n");
 
     }
 
