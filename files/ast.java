@@ -369,8 +369,8 @@ class FormalDeclNode extends DeclNode {
     }
 
     public void nameAnalysis(SymTable symTab){
-        SemSym sym = new SemSym(myId.getName, myType.getType());
-        symTab.addDecl(sym);
+        SemSym sym = new SemSym(myId.getName(), myType.getType());
+        symTab.addDecl(myId.getName(), sym);
     }
 
     public void unparse(PrintWriter p, int indent) {
