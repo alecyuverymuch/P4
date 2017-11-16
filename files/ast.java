@@ -767,7 +767,6 @@ class ReturnStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(SymTable symTab){
-        myExp.nameAnalysis(symTab);
     }
 
     public void unparse(PrintWriter p, int indent) {
