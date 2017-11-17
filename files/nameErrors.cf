@@ -9,6 +9,6 @@ int test() {
     int f;
     int g;
     e = 4; //Undeclared identifier
-    //f = g.x; //Dot-access of non-struct type
-    //g = c.y; //Invalid struct field name
+    f = g.x; //Dot-access of non-struct type
+    g = c.y; //Invalid struct field name
 }
