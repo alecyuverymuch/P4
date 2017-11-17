@@ -740,6 +740,7 @@ class ReturnStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
+        myExp.nameAnalysis();
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -903,7 +904,7 @@ class IdNode extends ExpNode {
     public void unparse(PrintWriter p, int indent) {
         if (mySym == null) return;
         if (isDecl){
-            p.print(mySym.getReturnType());
+            p.print(myStrVal);
             return;
         }
         if (mySym.isFunc()) {
@@ -1031,6 +1032,8 @@ class AssignNode extends ExpNode {
     }
 
     public void nameAnalysis(){
+        myLhs.nameAnalysis();
+        myExp.nameAnalysis();
     }
 
     public void unparse(PrintWriter p, int indent) {
