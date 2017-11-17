@@ -1018,7 +1018,9 @@ class AssignNode extends ExpNode {
         myExp = exp;
     }
 
-    public void nameAnalysis(){}
+    public void nameAnalysis(){
+        myLhs.nameAnalysis();
+    }
 
     public void unparse(PrintWriter p, int indent) {
 		if (indent != -1)  p.print("(");
