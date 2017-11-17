@@ -960,33 +960,6 @@ class IdNode extends ExpNode {
             p.print(myStrVal);
             p.print("(" + myType + ")");
         }
-
-        // if (isDecl){
-        //     SemSym sym = symTab.lookupGlobal(myStrVal);
-        //     p.print(sym.getName());
-        //     return;
-        // }
-        // SemSym sym = symTab.lookupGlobal(myStrVal);
-        // if (sym == null) return;
-        // p.print(sym.getName());
-        // if (sym.isFunc()) {
-        //     List<String> types = sym.getParamTypes();
-        //     returnType = sym.getReturnType();
-        //     p.print("(");
-        //     Iterator<String> it = types.iterator();
-        //     if (it.hasNext()) { // if there is at least one element
-        //         p.print(it.next());
-        //         while (it.hasNext()) {  // print the rest of the list
-        //             p.print(", ");
-        //             p.print(it.next());
-        //         }
-        //     }
-        //     p.print("->" + returnType + ")");
-        // }
-        // else {
-        //     String type = sym.getType();
-        //     p.print("(" + type + ")");
-        // }
     }
 
     private int myLineNum;
