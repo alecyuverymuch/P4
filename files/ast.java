@@ -896,7 +896,6 @@ class IdNode extends ExpNode {
             else {
                 myType = sym.getType();
             }
-            myStrVal = sym.getName();
             return;
         }
         if (isFunc) {
