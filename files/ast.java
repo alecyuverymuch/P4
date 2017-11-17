@@ -950,7 +950,7 @@ class IdNode extends ExpNode {
 
         if (isDecl){
             SemSym sym = symTab.lookupGlobal(myStrVal);
-            p.print(sym.getName())
+            p.print(sym.getName());
             return;
         }
         SemSym sym = symTab.lookupGlobal(myStrVal);
