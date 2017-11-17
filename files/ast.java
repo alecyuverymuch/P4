@@ -916,6 +916,7 @@ class IdNode extends ExpNode {
         SemSym sym = symTab.lookupGlobal(myStrVal);
         if (sym == null) return;
         if (sym.isFunc()) {
+            p.print(sym.getName());
             List<String> types = sym.getParamTypes();
             returnType = sym.getReturnType();
             p.print("(");
@@ -931,7 +932,7 @@ class IdNode extends ExpNode {
         }
         else {
             String type = sym.getType();
-            unparse(p, indent);
+            p.print(sym.getName());
             p.print("(" + type + ")");
         }
     }
