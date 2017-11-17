@@ -955,7 +955,7 @@ class IdNode extends ExpNode {
         }
         SemSym sym = symTab.lookupGlobal(myStrVal);
         if (sym == null) return;
-        p.print(sym.getName())
+        p.print(sym.getName());
         if (sym.isFunc()) {
             List<String> types = sym.getParamTypes();
             returnType = sym.getReturnType();
