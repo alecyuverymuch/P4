@@ -344,14 +344,15 @@ class FnDeclNode extends DeclNode {
         myId.setFunc(returnType, params, paramTypes);
         myId.setDecl(true);
         myId.nameAnalysis();
-        //symTab.addScope();
+        /////
+        symTab.addScope();
         myFormalsList.nameAnalysis();
         myBody.nameAnalysis();
-        // try {
-        //     symTab.removeScope();
-        // } catch (EmptySymTableException e) {
+        try {
+            symTab.removeScope();
+        } catch (EmptySymTableException e) {
 
-        // }
+        }
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -613,15 +614,16 @@ class IfStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
-        //symTab.addScope();
+        ////
+        symTab.addScope();
         myDeclList.nameAnalysis();
         myExp.nameAnalysis();
         myStmtList.nameAnalysis();
-        // try {
-        //     symTab.removeScope();
-        // } catch (EmptySymTableException e) {
+        try {
+            symTab.removeScope();
+        } catch (EmptySymTableException e) {
             
-        // }
+        }
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -653,17 +655,18 @@ class IfElseStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
-        //symTab.addScope();
+        ////
+        symTab.addScope();
         myExp.nameAnalysis();
         myThenDeclList.nameAnalysis();
         myThenStmtList.nameAnalysis();
         myElseDeclList.nameAnalysis();
         myElseStmtList.nameAnalysis();
-        // try {
-        //     symTab.removeScope();
-        // } catch (EmptySymTableException e) {
+        try {
+            symTab.removeScope();
+        } catch (EmptySymTableException e) {
             
-        // }
+        }
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -699,15 +702,16 @@ class WhileStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
-        //symTab.addScope();
+        ////
+        symTab.addScope();
         myExp.nameAnalysis();
         myDeclList.nameAnalysis();
         myStmtList.nameAnalysis();
-        // try {
-        //     symTab.removeScope();
-        // } catch (EmptySymTableException e) {
+        try {
+            symTab.removeScope();
+        } catch (EmptySymTableException e) {
             
-        // }
+        }
     }
 	
     public void unparse(PrintWriter p, int indent) {
