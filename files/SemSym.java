@@ -6,7 +6,10 @@ public class SemSym {
     private boolean isFunc;
     private int params;
     private List<String> paramTypes;
+    private HashMap<String,SemSym> decls;
     private String returnType;
+    private String actualType = "";
+    private IdNode id;
     
     public SemSym(String name, String type) {
         this.name = name;
@@ -22,13 +25,43 @@ public class SemSym {
         this.params = params;
         this.paramTypes = paramTypes;
     }
+
+    public SemSym(String name,HashMap<String,SemSym> decls){
+	actualType = "struct";
+	this.type = "struct";
+	this.decls = decls;
+	this.name = name;
+    }
+
+    public SemSym(String name,HashMap<String,SemSym> decls,String type){
+	actualType = "struct";
+	this.type = type;
+	this.decls = decls;
+	this.name = name;
+    }
     
+    public HashMap<String,SemSym>getDecls(){
+	return decls;
+    }
+
     public String getName(){
         return name;
     }
 
+    public void setId(IdNode n){
+	id = n;
+    }
+
+    public IdNode getId(){
+	return id;
+    }
+
     public String getType() {
         return type;
+    }
+
+    public String getActualType(){
+	return actualType;
     }
 
     public String getReturnType(){
