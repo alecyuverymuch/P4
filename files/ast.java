@@ -313,8 +313,6 @@ class VarDeclNode extends DeclNode {
         doIndent(p, indent);
         myType.unparse(p, 0);
         p.print(" ");
-        String type = myType.getType();
-        myId.setVar(type);
         myId.unparse(p, 0);
         p.println(";");
     }
@@ -358,10 +356,6 @@ class FnDeclNode extends DeclNode {
         doIndent(p, indent);
         myType.unparse(p, 0);
         p.print(" ");
-        String returnType = myType.getType();
-        LinkedList<String> paramTypes = myFormalsList.getParamTypes();
-        int params = paramTypes.size();
-        myId.setFunc(returnType, params, paramTypes);
         myId.unparse(p, 0);
         p.print("(");
         myFormalsList.unparse(p, 0);
@@ -395,8 +389,6 @@ class FormalDeclNode extends DeclNode {
     public void unparse(PrintWriter p, int indent) {
         myType.unparse(p, 0);
         p.print(" ");
-        String type = myType.getType();
-        myId.setVar(type);
         myId.unparse(p, 0);
     }
 
@@ -940,7 +932,26 @@ class IdNode extends ExpNode {
     }
 
     public void unparse(PrintWriter p, int indent) {
-        p.print(myStrVal);
+        if (mySym.isFunc()) {
+            p.print(myStrVal);
+            List<String> types = mySym.getParamTypes();
+            returnType = mySym.getReturnType();
+            p.print("(");
+            Iterator<String> it = types.iterator();
+            if (it.hasNext()) { // if there is at least one element
+                p.print(it.next());
+                while (it.hasNext()) {  // print the rest of the list
+                    p.print(", ");
+                    p.print(it.next());
+                }
+            }
+            p.print("->" + returnType + ")");
+        }
+        else {
+            myType = mySym.getType();
+            p.print(myStrVal);
+            p.print("(" + type + ")");
+        }
     }
 
     public void unparseCall(PrintWriter p, int indent) {
