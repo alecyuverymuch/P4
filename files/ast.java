@@ -514,6 +514,7 @@ class AssignStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
+        myAssign.nameAnalysis();
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -532,6 +533,7 @@ class PostIncStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
+        myExp.nameAnalysis();
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -550,6 +552,7 @@ class PostDecStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
+        myExp.nameAnalysis();
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -568,6 +571,7 @@ class ReadStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
+        myExp.nameAnalysis();
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -587,6 +591,7 @@ class WriteStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
+        myExp.nameAnalysis();
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -869,6 +874,10 @@ class IdNode extends ExpNode {
 
     public void nameAnalysis(){
         if (!isDecl){
+            SemSym sym = symTab.lookupGlobal(myStrVal);
+            if (sym == null) {
+                ErrMsg.fatal(mylineNum, myCharNum, "Undeclaired identifier");
+            }
             return;
         }
         if (isFunc) {
