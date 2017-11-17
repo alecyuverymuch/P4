@@ -6,14 +6,10 @@ int x;
 bool def1;
 bool def2;
 bool y;
-
-////////////////////////////////////////////////////
 // Tests struct declarations
-//struct ghi1 { int z1; bool z2; };
-//struct ghi2 { int e; bool f; int g; bool h; };
-//struct ghi3 ghi4;
-/////////////////////////////////////////////////// 
-
+struct ghi1 { int z1; bool z2; };
+struct ghi2 { int e; bool f; int g; bool h; };
+struct ghi3 ghi4;
 // Test function declaration
 void test1() {}
 // Test function declaration with a parameter
