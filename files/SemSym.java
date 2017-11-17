@@ -17,6 +17,7 @@ public class SemSym {
     public SemSym(String name, String returnType, int params, List<String> paramTypes){
         isFunc = true;
         this.name = name;
+        this.type = returnType;
         this.returnType = returnType;
         this.params = params;
         this.paramTypes = paramTypes;
