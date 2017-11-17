@@ -756,7 +756,9 @@ class ReturnStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
-        myExp.nameAnalysis();
+        if (myExp != null) {
+            myExp.nameAnalysis();
+        }
     }
 
     public void unparse(PrintWriter p, int indent) {
