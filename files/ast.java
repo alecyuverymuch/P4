@@ -977,6 +977,7 @@ class IdNode extends ExpNode {
             SemSym sym = symTab.lookupGlobal(myStrVal);
             if (sym == null) {
                 ErrMsg.fatal(myLineNum, myCharNum, "Undeclaired identifier");
+                return;
             }
             mySym = sym;
             if (sym.isFunc()){
