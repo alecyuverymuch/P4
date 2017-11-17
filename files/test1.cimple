@@ -9,5 +9,6 @@ int i(int j, bool k){
     return l;
 }
 bool m(int n, bool o){
+    h();
     i(n,o);
 }
