@@ -1,18 +1,151 @@
-int a;
-bool b;
-int x;
-bool y;
-void h(){
+# Tests comments
+// Tests global variable declarations
+int abc1;
+int abc2;
+bool def1;
+bool def2;
+
+////////////////////////////////////////////////////
+// Tests struct declarations
+//struct ghi1 { int z1; bool z2; };
+//struct ghi2 { int e; bool f; int g; bool h; };
+//struct ghi3 ghi4;
+/////////////////////////////////////////////////// 
+
+// Test function declaration
+void test1() {}
+// Test function declaration with a parameter
+void test2(int one) {}
+// Test function declaration with multiple parameters
+void test3(int one, int two, bool three, bool four){}
+// Test function declaration with body
+int test4() {
+    int x;
+    x = 4;
+    return x;
 }
-int i(int j, bool k){
-    int l;
-    l = 4;
-    return l;
+// Test function declaration with parameters and integer functions
+int test5(int x, int i) {
+    int y;
+    int z;
+    y = 1;
+    z = 2;
+    x++;
+    x--;
+    x = 4 + 4;
+    x = 4 * 4;
+    x = 4 - 4;
+    x = 4 / 4;
+    x = y;
+    y = -x;
+    x = x + y * z - 2 * 4;
+    x = (x + y) * ((z - 2) - (2 * 4));
+    return i;
 }
-bool m(int n, bool o){
-    h();
-    i(n,o);
+// Tests function with bool functions
+bool test6(bool x, bool y) {
+    bool z;
+    z = true;
+    z = false;
+    z = x || y;
+    z = x && y;
+    z = x && y || z;
+    z = !x;
+    z = !x || y;
+    z = !(x || (y && z));
+    return z;
 }
+// Tests function with comparisons
+bool test7(int x, int y, int z) {
+    bool a;
+    a = x > y;
+    a = x < y;
+    a = x >= y;
+    a = x <= y;
+    a = x == y;
+    a = x != y;
+    a = x + 1 == y * 2;
+    a = x > y && x > z || y < z;
+    a = !(x + 2 > 0 || y <= z* 4 && z < 2 + 2);
+    return a;
+}
+// Tests cin
+bool func8() {
+    int k; 
+    cin >> k;
+} 
+// Tests cout
+void func9(int l) {
+    cout << l;
+}
+// Tests if statements
+void func10(int l) {
+    if (l >= 6) {
+        return true;
+    }
+}
+int func11(int l) {
+    if (l <= 6) {
+        return;
+    }
+}
+// Tests if else statements with calls to functions (with and without parameters)
+bool func12(bool m, int n, int o) {
+    if (n<o) {
+        func6();
+    }
+    else {
+        func6(n);
+    }
+    return 5*10;
+}
+// Tests while statements
+void func13(int j, bool k, int l, bool m) {
+    while ((k||m)&&true) {
+        bool x; 
+        x = 7 != 7; 
+    }
+    return 6/7;
+}
+// Tests a large expression
+int func14(int s,bool t) {
+    t = !((7 + x - 5 * 4 / 2) == true) && (7 <=5 )||(7 != 7)||(7 <5 )||(7 >=5 )||(7 >5 );
+}
+
+
+//////////////////////////////////////
+// Tests dot operator
+//bool func15(bool b){
+//    int x; 
+//    x = b.c.v;
+//}
+/////////////////////////////////////
+
+
+// Tests strings
+bool func16(bool b){
+    int x; 
+    x = "hello" + "string"; 
+}
+// Tests nested statements
+bool func17(bool b){
+    int x; 
+    while(true || false && true){
+        if(true){
+            if(false){
+                while(true){
+                }
+            }
+        }
+    }
+}
+// Tests assignments with function calls
+int func18(int first, int second){
+    int third;
+    third = test5(first, second);
+    third = test5(first + 2, second - first);
+}
+// Comprehensive Tests
 int main() { 
     int a1; # comment
     int a2;
@@ -21,6 +154,7 @@ int main() {
     bool b2;
     bool b3;
     a1 = 1 + 2 * 3 * ( 3 - 1 ) / 3;
+    a1 = -a2;
     b1 = false || true && false;
     b2 = a1 >= a2 || a1 <= a2 || a1 < a2 || a1 > a2 || a1 != a2;
     b3 = b1 || b2 && (b1 && !b2);
@@ -46,7 +180,15 @@ int main() {
     }
     while (a1 > a2) {
         int x;
-        x = a1.a2.a3;
+        x = 4;
+
+        /////////////////////////////////////////////
+        //x = a1.a2.a3;
+        /////////////////////////////////////////////
+
+
         a1 = x;
     }
+    a1 = l(a2, b2);
+    a2 = l(a2 + a3, b2 || b3);
 }
