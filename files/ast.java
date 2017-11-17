@@ -893,10 +893,31 @@ class IdNode extends ExpNode {
     }
 
     public void unparse(PrintWriter p, int indent) {
-        if (mySym.isFunc()) {
-            p.print(myStrVal);
-            List<String> types = mySym.getParamTypes();
-            returnType = mySym.getReturnType();
+        // if (mySym.isFunc()) {
+        //     p.print(myStrVal);
+        //     List<String> types = mySym.getParamTypes();
+        //     returnType = mySym.getReturnType();
+        //     p.print("(");
+        //     Iterator<String> it = types.iterator();
+        //     if (it.hasNext()) { // if there is at least one element
+        //         p.print(it.next());
+        //         while (it.hasNext()) {  // print the rest of the list
+        //             p.print(", ");
+        //             p.print(it.next());
+        //         }
+        //     }
+        //     p.print("->" + returnType + ")");
+        // }
+        // else {
+        //     myType = mySym.getType();
+        //     p.print(myStrVal);
+        //     p.print("(" + myType + ")");
+        // }
+        SemSym sym = symTab.lookupGlobal(myStrVal);
+        if (sym == null) return;
+        if (sym.isFunc()) {
+            List<String> types = sym.getParamTypes();
+            returnType = sym.getReturnType();
             p.print("(");
             Iterator<String> it = types.iterator();
             if (it.hasNext()) { // if there is at least one element
@@ -909,9 +930,9 @@ class IdNode extends ExpNode {
             p.print("->" + returnType + ")");
         }
         else {
-            myType = mySym.getType();
-            p.print(myStrVal);
-            p.print("(" + myType + ")");
+            String type = sym.getType();
+            unparse(p, indent);
+            p.print("(" + type + ")");
         }
     }
 
