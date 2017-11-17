@@ -737,6 +737,7 @@ class ReturnStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
+        myExp.nameAnalysis();
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -1020,6 +1021,7 @@ class AssignNode extends ExpNode {
 
     public void nameAnalysis(){
         myLhs.nameAnalysis();
+        myExp.nameAnalysis();
     }
 
     public void unparse(PrintWriter p, int indent) {
