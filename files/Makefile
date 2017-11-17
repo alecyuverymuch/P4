@@ -42,6 +42,7 @@ ErrMsg.class: ErrMsg.java
 test:
 	#java -cp $(CP) P4 test.cimple test.out
 	java -cp $(CP) P4 test1.cimple test1.out
+	java -cp $(CP) P4 nameErrors.cf nameErrors.out
 
 ###
 # clean

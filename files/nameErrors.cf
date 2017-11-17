@@ -1,0 +1,12 @@
+void a; //Non-function declared void
+int b;
+int b; //Multiply declared identifier
+struct c {
+    int x;
+}
+struct b d; //Invalid name of struct type
+int test() {
+    e = 4; //Undeclared identifier
+    b = b.x; //Dot-access of non-struct type
+    b = c.y; //Invalid struct field name
+}
