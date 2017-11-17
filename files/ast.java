@@ -945,7 +945,7 @@ class IdNode extends ExpNode {
 
     public void unparseCall(PrintWriter p, int indent) {
         SemSym sym = symTab.lookupGlobal(myStrVal);
-        if (sym == null) break;
+        if (sym == null) return;
         if (sym.isFunc()) {
             List<String> types = sym.getParamTypes();
             returnType = sym.getReturnType();
