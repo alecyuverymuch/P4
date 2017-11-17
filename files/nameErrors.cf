@@ -7,6 +7,6 @@ struct c {
 struct b d; //Invalid name of struct type
 int test() {
     e = 4; //Undeclared identifier
-    b = b.x; //Dot-access of non-struct type
+    //b = b.x; //Dot-access of non-struct type
     b = c.y; //Invalid struct field name
 }
