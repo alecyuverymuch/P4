@@ -92,10 +92,10 @@ int test11(int l) {
 // Tests if else statements with calls to functions (with and without parameters)
 bool test12(bool m, int n, int o) {
     if (n<o) {
-        func6();
+        test6(true, false);
     }
     else {
-        func6(n);
+        test6(m, !m);
     }
     return 5*10;
 }
