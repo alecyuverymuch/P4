@@ -615,6 +615,8 @@ class IfStmtNode extends StmtNode {
     public void nameAnalysis(){
         //symTab.addScope();
         myDeclList.nameAnalysis();
+        myExp.nameAnalysis();
+        myStmtList.nameAnalysis();
         // try {
         //     symTab.removeScope();
         // } catch (EmptySymTableException e) {
@@ -652,8 +654,11 @@ class IfElseStmtNode extends StmtNode {
 
     public void nameAnalysis(){
         //symTab.addScope();
+        myExp.nameAnalysis();
         myThenDeclList.nameAnalysis();
+        myThenStmtList.nameAnalysis();
         myElseDeclList.nameAnalysis();
+        myElseStmtList.nameAnalysis();
         // try {
         //     symTab.removeScope();
         // } catch (EmptySymTableException e) {
@@ -695,7 +700,9 @@ class WhileStmtNode extends StmtNode {
 
     public void nameAnalysis(){
         //symTab.addScope();
+        myExp.nameAnalysis();
         myDeclList.nameAnalysis();
+        myStmtList.nameAnalysis();
         // try {
         //     symTab.removeScope();
         // } catch (EmptySymTableException e) {
@@ -878,6 +885,7 @@ class IdNode extends ExpNode {
             if (sym == null) {
                 ErrMsg.fatal(myLineNum, myCharNum, "Undeclaired identifier");
             }
+            myStrVal = sym.getName();
             return;
         }
         if (isFunc) {
