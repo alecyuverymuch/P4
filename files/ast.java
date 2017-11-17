@@ -1056,7 +1056,6 @@ class CallExpNode extends ExpNode {
 			myExpList.unparse(p, 0);
 		}
         p.print(")");
-        myId.unparse(p, 0);
     }
 
     // 2 kids
