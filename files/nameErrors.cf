@@ -6,7 +6,9 @@ struct c {
 };
 struct b d; //Invalid name of struct type
 int test() {
+    int f;
+    int g;
     e = 4; //Undeclared identifier
-    //b = b.x; //Dot-access of non-struct type
-    b = c.y; //Invalid struct field name
+    f = g.x; //Dot-access of non-struct type
+    g = c.y; //Invalid struct field name
 }
