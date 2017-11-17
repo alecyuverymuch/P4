@@ -108,8 +108,8 @@ void test13(int j, bool k, int l, bool m) {
     return 6/7;
 }
 // Tests a large expression
-int test14(int s,bool t) {
-    t = !((7 + x - 5 * 4 / 2) == true) && (7 <=5 )||(7 != 7)||(7 <5 )||(7 >=5 )||(7 >5 );
+int test14(int s, bool t) {
+    t = !((7 + s - 5 * 4 / 2) == true) && (7 <=5 )||(7 != 7)||(7 <5 )||(7 >=5 )||(7 >5 );
 }
 
 
