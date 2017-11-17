@@ -852,6 +852,7 @@ class IdNode extends ExpNode {
 
     public void setFunc(String returnType, int params, LinkedList<String> paramTypes){
         isFunc = true;
+        myType = returnType;
         this.returnType = returnType;
         this.params = params;
         this.paramTypes = paramTypes;
