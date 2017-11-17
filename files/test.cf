@@ -2,8 +2,10 @@
 // Tests global variable declarations
 int abc1;
 int abc2;
+int x;
 bool def1;
 bool def2;
+bool y;
 
 ////////////////////////////////////////////////////
 // Tests struct declarations
@@ -144,6 +146,16 @@ int test18(int first, int second){
     int third;
     third = test5(first, second);
     third = test5(first + 2, second - first);
+}
+// Tests access to global variables in higher scopes
+int test19(){
+    int something;
+    something = x;
+    if (y){
+        something = 2;
+        something = something + 2;
+        y = true;
+    }
 }
 // Comprehensive Tests
 int main() { 
