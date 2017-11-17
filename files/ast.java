@@ -957,6 +957,7 @@ class IdNode extends ExpNode {
 
     public void setSym(SemSym sym){
         mySym = sym;
+        myStrVal = sym.getName();
     }
 
     public void setVar(String type){
