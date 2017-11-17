@@ -889,6 +889,13 @@ class IdNode extends ExpNode {
             if (sym == null) {
                 ErrMsg.fatal(myLineNum, myCharNum, "Undeclaired identifier");
             }
+            if (sym.isFunc()){
+                returnType = sym.getReturnType();
+                paramTypes = new LinkedList<String>(sym.getParamTypes());
+            }
+            else {
+                myType = sym.getType();
+            }
             myStrVal = sym.getName();
             return;
         }
@@ -926,43 +933,15 @@ class IdNode extends ExpNode {
     }
 
     public void unparse(PrintWriter p, int indent) {
-        // if (mySym == null) return;
-        // if (isDecl){
-        //     p.print(myStrVal);
-        //     return;
-        // }
-        // if (mySym.isFunc()) {
-        //     p.print(myStrVal);
-        //     List<String> types = mySym.getParamTypes();
-        //     returnType = mySym.getReturnType();
-        //     p.print("(");
-        //     Iterator<String> it = types.iterator();
-        //     if (it.hasNext()) { // if there is at least one element
-        //         p.print(it.next());
-        //         while (it.hasNext()) {  // print the rest of the list
-        //             p.print(", ");
-        //             p.print(it.next());
-        //         }
-        //     }
-        //     p.print("->" + returnType + ")");
-        // }
-        // else {
-        //     myType = mySym.getType();
-        //     p.print(myStrVal);
-        //     p.print("(" + myType + ")");
-        // }
-
+        if (mySym == null) return;
         if (isDecl){
-            SemSym sym = symTab.lookupGlobal(myStrVal);
-            p.print(sym.getName());
+            p.print(myStrVal);
             return;
         }
-        SemSym sym = symTab.lookupGlobal(myStrVal);
-        if (sym == null) return;
-        p.print(sym.getName());
-        if (sym.isFunc()) {
-            List<String> types = sym.getParamTypes();
-            returnType = sym.getReturnType();
+        if (mySym.isFunc()) {
+            p.print(myStrVal);
+            List<String> types = mySym.getParamTypes();
+            returnType = mySym.getReturnType();
             p.print("(");
             Iterator<String> it = types.iterator();
             if (it.hasNext()) { // if there is at least one element
@@ -975,9 +954,37 @@ class IdNode extends ExpNode {
             p.print("->" + returnType + ")");
         }
         else {
-            String type = sym.getType();
-            p.print("(" + type + ")");
+            myType = mySym.getType();
+            p.print(myStrVal);
+            p.print("(" + myType + ")");
         }
+
+        // if (isDecl){
+        //     SemSym sym = symTab.lookupGlobal(myStrVal);
+        //     p.print(sym.getName());
+        //     return;
+        // }
+        // SemSym sym = symTab.lookupGlobal(myStrVal);
+        // if (sym == null) return;
+        // p.print(sym.getName());
+        // if (sym.isFunc()) {
+        //     List<String> types = sym.getParamTypes();
+        //     returnType = sym.getReturnType();
+        //     p.print("(");
+        //     Iterator<String> it = types.iterator();
+        //     if (it.hasNext()) { // if there is at least one element
+        //         p.print(it.next());
+        //         while (it.hasNext()) {  // print the rest of the list
+        //             p.print(", ");
+        //             p.print(it.next());
+        //         }
+        //     }
+        //     p.print("->" + returnType + ")");
+        // }
+        // else {
+        //     String type = sym.getType();
+        //     p.print("(" + type + ")");
+        // }
     }
 
     private int myLineNum;
