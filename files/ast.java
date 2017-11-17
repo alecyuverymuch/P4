@@ -889,6 +889,7 @@ class IdNode extends ExpNode {
             if (sym == null) {
                 ErrMsg.fatal(myLineNum, myCharNum, "Undeclaired identifier");
             }
+            mySym = sym;
             if (sym.isFunc()){
                 returnType = sym.getReturnType();
                 paramTypes = new LinkedList<String>(sym.getParamTypes());
