@@ -950,7 +950,7 @@ class IdNode extends ExpNode {
         else {
             myType = mySym.getType();
             p.print(myStrVal);
-            p.print("(" + type + ")");
+            p.print("(" + myType + ")");
         }
     }
 
