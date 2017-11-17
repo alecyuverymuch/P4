@@ -933,10 +933,7 @@ class IdNode extends ExpNode {
     }
 
     public void unparse(PrintWriter p, int indent) {
-        if (mySym == null){
-            p.print("fail");
-            return;
-        }
+        if (mySym == null) return;
         if (isDecl){
             p.print(myStrVal);
             return;

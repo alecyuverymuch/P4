@@ -109,7 +109,7 @@ int test14(int s,bool t) {
 // Tests dot operator
 bool test15(bool b){
     int x; 
-    x = b.c.v;
+    x = b.c;
 }
 // Tests strings
 bool test16(bool b){
