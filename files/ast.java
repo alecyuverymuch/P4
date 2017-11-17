@@ -893,6 +893,7 @@ class IdNode extends ExpNode {
     }
 
     public void unparse(PrintWriter p, int indent) {
+        if (mySym == null) return;
         if (mySym.isFunc()) {
             p.print(myStrVal);
             List<String> types = mySym.getParamTypes();
