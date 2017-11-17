@@ -344,7 +344,7 @@ class FnDeclNode extends DeclNode {
         myId.setFunc(returnType, params, paramTypes);
         myId.setDecl(true);
         myId.nameAnalysis();
-        /////
+        
         symTab.addScope();
         myFormalsList.nameAnalysis();
         myBody.nameAnalysis();
@@ -614,7 +614,6 @@ class IfStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
-        ////
         symTab.addScope();
         myDeclList.nameAnalysis();
         myExp.nameAnalysis();
@@ -702,7 +701,6 @@ class WhileStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
-        ////
         symTab.addScope();
         myExp.nameAnalysis();
         myDeclList.nameAnalysis();
@@ -915,7 +913,7 @@ class IdNode extends ExpNode {
             } catch (DuplicateSymException e) {
                 ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
             } catch (EmptySymTableException e) {
-                //TODO maybe to do with scopes?
+                
             }
         }
         else {
@@ -929,7 +927,7 @@ class IdNode extends ExpNode {
             } catch (DuplicateSymException e) {
                 ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
             } catch (EmptySymTableException e) {
-                //TODO maybe to do with scopes?
+                
             }
         }
     }
