@@ -56,11 +56,11 @@ public class P4 {
             System.exit(-1);
         }
         SymTable symTable = new SymTable();
+        ((ASTnode)root.value).setSymTable(symTable);
         if (ErrMsg.fatal == false) {
-            ((ASTnode)root.value).nameAnalysis(symTable);
+            ((ASTnode)root.value).nameAnalysis();
         }
         symTable.print();
-        //((ASTnode)root.value).setSymTable(symTable);
         if (ErrMsg.fatal == false) {
             ((ASTnode)root.value).unparse(outFile, 0);
         }
