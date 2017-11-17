@@ -104,8 +104,9 @@ import java.util.*;
 // **********************************************************************
 // ASTnode class (base class for all other kinds of nodes)
 // **********************************************************************
-public SymTable symTab;
+
 abstract class ASTnode { 
+    public static SymTable symTab;
     // every subclass must provide an unparse operation
     abstract public void unparse(PrintWriter p, int indent);
 
