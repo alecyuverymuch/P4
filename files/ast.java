@@ -868,6 +868,9 @@ class IdNode extends ExpNode {
     }
 
     public void nameAnalysis(){
+        if (!isDecl){
+            return;
+        }
         if (isFunc) {
             // For function declarations
             try {
