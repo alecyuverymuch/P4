@@ -922,39 +922,15 @@ class IdNode extends ExpNode {
     }
 
     public void unparse(PrintWriter p, int indent) {
-        if (mySym == null) return;
-        if (isDecl){
-            p.print(myStrVal);
-            return;
-        }
-        if (mySym.isFunc()) {
-            p.print(myStrVal);
-            List<String> types = mySym.getParamTypes();
-            returnType = mySym.getReturnType();
-            p.print("(");
-            Iterator<String> it = types.iterator();
-            if (it.hasNext()) { // if there is at least one element
-                p.print(it.next());
-                while (it.hasNext()) {  // print the rest of the list
-                    p.print(", ");
-                    p.print(it.next());
-                }
-            }
-            p.print("->" + returnType + ")");
-        }
-        else {
-            myType = mySym.getType();
-            p.print(myStrVal);
-            p.print("(" + myType + ")");
-        }
-
-
-        // SemSym sym = symTab.lookupGlobal(myStrVal);
-        // if (sym == null) return;
-        // p.print(sym.getName())
-        // if (sym.isFunc()) {
-        //     List<String> types = sym.getParamTypes();
-        //     returnType = sym.getReturnType();
+        // if (mySym == null) return;
+        // if (isDecl){
+        //     p.print(myStrVal);
+        //     return;
+        // }
+        // if (mySym.isFunc()) {
+        //     p.print(myStrVal);
+        //     List<String> types = mySym.getParamTypes();
+        //     returnType = mySym.getReturnType();
         //     p.print("(");
         //     Iterator<String> it = types.iterator();
         //     if (it.hasNext()) { // if there is at least one element
@@ -967,15 +943,19 @@ class IdNode extends ExpNode {
         //     p.print("->" + returnType + ")");
         // }
         // else {
-        //     String type = sym.getType();
-        //     p.print(sym.getName());
-        //     p.print("(" + type + ")");
+        //     myType = mySym.getType();
+        //     p.print(myStrVal);
+        //     p.print("(" + myType + ")");
         // }
-    }
 
-    public void unparseCall(PrintWriter p, int indent) {
+        if (isDecl){
+            SemSym sym = symTab.lookupGlobal(myStrVal);
+            p.print(sym.getName())
+            return;
+        }
         SemSym sym = symTab.lookupGlobal(myStrVal);
         if (sym == null) return;
+        p.print(sym.getName())
         if (sym.isFunc()) {
             List<String> types = sym.getParamTypes();
             returnType = sym.getReturnType();
@@ -992,25 +972,9 @@ class IdNode extends ExpNode {
         }
         else {
             String type = sym.getType();
-            unparse(p, indent);
+            p.print(sym.getName());
             p.print("(" + type + ")");
         }
-        // if (isFunc) {
-        //     p.print("(");
-        //     Iterator<String> it = paramTypes.iterator();
-        //     if (it.hasNext()) { // if there is at least one element
-        //         p.print(it.next());
-        //         while (it.hasNext()) {  // print the rest of the list
-        //             p.print(", ");
-        //             p.print(it.next());
-        //         }
-        //     }
-        //     p.print("->" + returnType + ")");
-        // }
-        // else {
-        //     unparse(p, indent);
-        //     p.print("(" + myType + ")");
-        // }
     }
 
     private int myLineNum;
@@ -1081,7 +1045,8 @@ class CallExpNode extends ExpNode {
     }
 
     public void nameAnalysis(){
-
+        myId.nameAnalysis();
+        myExpList.nameAnalysis();
     }
 
     // ** unparse **
@@ -1129,7 +1094,9 @@ class UnaryMinusNode extends UnaryExpNode {
         super(exp);
     }
 
-    public void nameAnalysis(){}
+    public void nameAnalysis(){
+        myExp.nameAnalysis();
+    }
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(-");
@@ -1143,7 +1110,9 @@ class NotNode extends UnaryExpNode {
         super(exp);
     }
 
-    public void nameAnalysis(){}
+    public void nameAnalysis(){
+        myExp.nameAnalysis();
+    }
 
     public void unparse(PrintWriter p, int indent) {
         p.print("(!");
@@ -1161,7 +1130,10 @@ class PlusNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
-    public void nameAnalysis(){}
+    public void nameAnalysis(){
+        myExp1.nameAnalysis();
+        myExp2.nameAnalysis();
+    }
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
@@ -1177,7 +1149,10 @@ class MinusNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
-    public void nameAnalysis(){}
+    public void nameAnalysis(){
+        myExp1.nameAnalysis();
+        myExp2.nameAnalysis();
+    }
 
     public void unparse(PrintWriter p, int indent) {
         p.print("(");
@@ -1193,7 +1168,10 @@ class TimesNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
-    public void nameAnalysis(){}
+    public void nameAnalysis(){
+        myExp1.nameAnalysis();
+        myExp2.nameAnalysis();
+    }
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
@@ -1209,7 +1187,10 @@ class DivideNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
-    public void nameAnalysis(){}
+    public void nameAnalysis(){
+        myExp1.nameAnalysis();
+        myExp2.nameAnalysis();
+    }
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
@@ -1225,7 +1206,10 @@ class AndNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
-    public void nameAnalysis(){}
+    public void nameAnalysis(){
+        myExp1.nameAnalysis();
+        myExp2.nameAnalysis();
+    }
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
@@ -1241,7 +1225,10 @@ class OrNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
-    public void nameAnalysis(){}
+    public void nameAnalysis(){
+        myExp1.nameAnalysis();
+        myExp2.nameAnalysis();
+    }
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
@@ -1257,7 +1244,10 @@ class EqualsNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
-    public void nameAnalysis(){}
+    public void nameAnalysis(){
+        myExp1.nameAnalysis();
+        myExp2.nameAnalysis();
+    }
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
@@ -1273,7 +1263,10 @@ class NotEqualsNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
-    public void nameAnalysis(){}
+    public void nameAnalysis(){
+        myExp1.nameAnalysis();
+        myExp2.nameAnalysis();
+    }
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
@@ -1289,7 +1282,10 @@ class LessNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
-    public void nameAnalysis(){}
+    public void nameAnalysis(){
+        myExp1.nameAnalysis();
+        myExp2.nameAnalysis();
+    }
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
@@ -1305,7 +1301,10 @@ class GreaterNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
-    public void nameAnalysis(){}
+    public void nameAnalysis(){
+        myExp1.nameAnalysis();
+        myExp2.nameAnalysis();
+    }
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
@@ -1321,7 +1320,10 @@ class LessEqNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
-    public void nameAnalysis(){}
+    public void nameAnalysis(){
+        myExp1.nameAnalysis();
+        myExp2.nameAnalysis();
+    }
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
@@ -1337,7 +1339,10 @@ class GreaterEqNode extends BinaryExpNode {
         super(exp1, exp2);
     }
 
-    public void nameAnalysis(){}
+    public void nameAnalysis(){
+        myExp1.nameAnalysis();
+        myExp2.nameAnalysis();
+    }
 
     public void unparse(PrintWriter p, int indent) {
 	    p.print("(");
