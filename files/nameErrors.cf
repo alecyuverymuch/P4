@@ -3,7 +3,7 @@ int b;
 int b; //Multiply declared identifier
 struct c {
     int x;
-}
+};
 struct b d; //Invalid name of struct type
 int test() {
     e = 4; //Undeclared identifier
