@@ -306,6 +306,7 @@ class VarDeclNode extends DeclNode {
     public void nameAnalysis() {
         String type = myType.getType();
         myId.setVar(type);
+        myId.setDecl(true);
         myId.nameAnalysis();
     }
 
@@ -341,6 +342,7 @@ class FnDeclNode extends DeclNode {
         LinkedList<String> paramTypes = myFormalsList.getParamTypes();
         int params = paramTypes.size();
         myId.setFunc(returnType, params, paramTypes);
+        myId.setDecl(true);
         myId.nameAnalysis();
         //symTab.addScope();
         myFormalsList.nameAnalysis();
@@ -383,6 +385,7 @@ class FormalDeclNode extends DeclNode {
 
     public void nameAnalysis(){
         myId.setVar(myType.getType());
+        myId.setDecl(true);
         myId.nameAnalysis();
     }
 
@@ -759,6 +762,11 @@ class ReturnStmtNode extends StmtNode {
 // **********************************************************************
 
 abstract class ExpNode extends ASTnode {
+    public boolean isDecl = false;
+
+    public void setDecl(boolean isDecl){
+        this.isDecl = isDecl;
+    }
 }
 
 class IntLitNode extends ExpNode {
@@ -895,6 +903,10 @@ class IdNode extends ExpNode {
 
     public void unparse(PrintWriter p, int indent) {
         if (mySym == null) return;
+        if (isDecl){
+            p.print(mySym.getReturnType());
+            return;
+        }
         if (mySym.isFunc()) {
             p.print(myStrVal);
             List<String> types = mySym.getParamTypes();
