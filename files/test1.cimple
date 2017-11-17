@@ -1,5 +1,7 @@
 int a;
 bool b;
+int x;
+bool y;
 void h(){
 }
 int i(int j, bool k){
