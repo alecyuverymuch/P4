@@ -344,14 +344,14 @@ class FnDeclNode extends DeclNode {
         int params = paramTypes.size();
         myId.setFunc(returnType, params, paramTypes);
         myId.nameAnalysis();
-        symTab.addScope();
+        //symTab.addScope();
         myFormalsList.nameAnalysis();
         myBody.nameAnalysis();
-        try {
-            symTab.removeScope();
-        } catch (EmptySymTableException e) {
+        // try {
+        //     symTab.removeScope();
+        // } catch (EmptySymTableException e) {
 
-        }
+        // }
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -633,13 +633,13 @@ class IfStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
-        symTab.addScope();
+        //symTab.addScope();
         myDeclList.nameAnalysis();
-        try {
-            symTab.removeScope();
-        } catch (EmptySymTableException e) {
+        // try {
+        //     symTab.removeScope();
+        // } catch (EmptySymTableException e) {
             
-        }
+        // }
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -676,14 +676,14 @@ class IfElseStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
-        symTab.addScope();
+        //symTab.addScope();
         myThenDeclList.nameAnalysis();
         myElseDeclList.nameAnalysis();
-        try {
-            symTab.removeScope();
-        } catch (EmptySymTableException e) {
+        // try {
+        //     symTab.removeScope();
+        // } catch (EmptySymTableException e) {
             
-        }
+        // }
     }
 
     public void unparse(PrintWriter p, int indent) {
@@ -724,13 +724,13 @@ class WhileStmtNode extends StmtNode {
     }
 
     public void nameAnalysis(){
-        symTab.addScope();
+        //symTab.addScope();
         myDeclList.nameAnalysis();
-        try {
-            symTab.removeScope();
-        } catch (EmptySymTableException e) {
+        // try {
+        //     symTab.removeScope();
+        // } catch (EmptySymTableException e) {
             
-        }
+        // }
     }
 	
     public void unparse(PrintWriter p, int indent) {
