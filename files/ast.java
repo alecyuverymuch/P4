@@ -469,7 +469,6 @@ class StructDeclNode extends DeclNode {
         SemSym sym = new SemSym(myId.getName(),myDeclList.getSyms());
 	try{
 		if(myId.checkId("struct")){
-            myId.setSym(sym);
             myId.setDecl(true);
 	        symTab.addDecl(myId.getName(),sym);
 		}
