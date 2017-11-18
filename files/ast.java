@@ -567,12 +567,11 @@ class StructNode extends TypeNode {
     
     public boolean checkType(){
 	SemSym s = symTab.lookupGlobal(myId.getName());
-	boolean check = true;
 	if(s == null){
         if (check){
             myId.undeclaredId();
         }
-	   check = false;
+	    check = false;
 	}else if(!s.getType().equals("struct")){
 	   myId.structBadDecl();
 	   check = false;
@@ -599,6 +598,7 @@ class StructNode extends TypeNode {
     }
     private IdNode myId;
     private String type = "";
+    public boolean check = true;
 }
 
 // **********************************************************************
