@@ -1043,11 +1043,11 @@ class IdNode extends ExpNode {
     public boolean checkId(String type){
 	boolean check = true;
 	if (type.equals("void")) {
-            //ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
+            ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
 	    check = false;
         }
 	if(symTab.lookupLocal(myStrVal) != null){
-	    //ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
+	    ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
 	    check = false;
 	}
 	return check;
