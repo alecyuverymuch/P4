@@ -1041,30 +1041,30 @@ class IdNode extends ExpNode {
     public boolean checkId(String type){
 	boolean check = true;
 	if (type.equals("void")) {
-            ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
+            //ErrMsg.fatal(myLineNum, myCharNum, "Non-fuction declared void");
 	    check = false;
         }
 	if(symTab.lookupLocal(myStrVal) != null){
-	    ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
+	    //ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
 	    check = false;
 	}
 	return check;
     }
 
     public void undeclaredId(){
-	ErrMsg.fatal(myLineNum, myCharNum, "Undeclared identifier");
+	//ErrMsg.fatal(myLineNum, myCharNum, "Undeclared identifier");
     }
 
     public void structBadDecl(){
-	ErrMsg.fatal(myLineNum, myCharNum, "Invalid name of struct type");
+	//ErrMsg.fatal(myLineNum, myCharNum, "Invalid name of struct type");
     }
 
     public void structLhsAccess(){
-	ErrMsg.fatal(myLineNum, myCharNum, "Dot-access of non-struct type");
+	//ErrMsg.fatal(myLineNum, myCharNum, "Dot-access of non-struct type");
     }
 
     public void structRhsAccess(){
-	ErrMsg.fatal(myLineNum, myCharNum, "Invalid struct field name");
+	//ErrMsg.fatal(myLineNum, myCharNum, "Invalid struct field name");
     }
 
     public void unparse(PrintWriter p, int indent) {
