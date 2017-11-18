@@ -12,7 +12,6 @@ struct ghi2 { int e; bool f; int g; bool h; };
 struct ghi2 ghi3;
 // Test function declaration
 void test1() {
-    x = ghi3.g;
 }
 // Test function declaration with a parameter
 void test2(int one) {}
