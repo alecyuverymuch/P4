@@ -7,7 +7,7 @@ bool def1;
 bool def2;
 bool y;
 // Tests struct declarations
-struct ghi1 { int z1; bool z2; };
+struct ghi1 { int z1; bool z2; int x;};
 struct ghi2 { int e; bool f; int g; bool h; struct ghi1 ghi3;};
 struct ghi4 { struct ghi2 ghi5; struct ghi1 ghi1; };
 struct ghi4 ghi6;
