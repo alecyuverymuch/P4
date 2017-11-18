@@ -335,7 +335,6 @@ class VarDeclNode extends DeclNode {
 		SemSym s = new SemSym(myId.getName(),(symTab.lookupGlobal(myType.getType())).getDecls(),myType.getType());
 	      try{
               myId.setSym(s);
-              myId.setDecl(true);
 	        symTab.addDecl(s.getName(),s);
 	      }catch(DuplicateSymException e){
 
