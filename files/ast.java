@@ -957,6 +957,7 @@ class IdNode extends ExpNode {
         myStrVal = strVal;
         myType = "";
         isFunc = false;
+        isDupl = false;
         returnType = "";
         params = 0;
         paramTypes = null;
@@ -1013,7 +1014,7 @@ class IdNode extends ExpNode {
                 mySym = new SemSym(myStrVal, returnType, params, paramTypes);
                 symTab.addDecl(myStrVal, mySym);
             } catch (DuplicateSymException e) {
-                ErrMsg.fatal(myLineNum, myCharNum, "Multiply declared identifier");
+                
             } catch (EmptySymTableException e) {
                 //TODO maybe to do with scopes?
             }
@@ -1099,6 +1100,7 @@ class IdNode extends ExpNode {
     public boolean isFunc;
     public String returnType;
     public int params;
+    public boolean isDupl;
     public LinkedList<String> paramTypes;
     public SemSym mySym;
 }

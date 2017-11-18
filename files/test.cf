@@ -151,6 +151,10 @@ void test20() {
     ghi6.ghi5.e = x;
     y = ghi2.f && ghi1.z2 && ghi4.ghi5.ghi3.z2;
 }
+// Tests duplicate functions
+void test20(int i){
+    x = i;
+}
 // Comprehensive Tests
 int main() { 
     int a1; # comment
