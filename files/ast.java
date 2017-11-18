@@ -356,23 +356,17 @@ class VarDeclNode extends DeclNode {
 	}
 	else if(myId.checkId(myType.getType())){
             SemSym s = new SemSym(myId.getName(),myType.getType());
-	    //try{
-            myId.setSym(s);
-            myId.setDecl(true);
-            symTab.addScope();
-            myId.nameAnalysis();
-            try{
-                symTab.removeScope();
-            } catch (EmptySymTableException e) {
-                
-            }
-	        //symTab.addDecl(s.getName(),s);
+	    try{
+            //myId.setSym(s);
+            //myId.setDecl(true);
+            //myId.nameAnalysis();
+	        symTab.addDecl(s.getName(),s);
 	        return s;
-	    // }catch(DuplicateSymException e){
+	     }catch(DuplicateSymException e){
 
-	    // }catch(EmptySymTableException e){
+	     }catch(EmptySymTableException e){
 		
-	    // }
+	     }
 	}
 	return null;
     }
@@ -488,7 +482,7 @@ class StructDeclNode extends DeclNode {
 	    }
     myId.nameAnalysis();
     myId.setDecl(true);
-	myDeclList.nameAnalysis();
+	//myDeclList.nameAnalysis();
     }
 
     public void unparse(PrintWriter p, int indent) {
