@@ -469,15 +469,15 @@ class StructDeclNode extends DeclNode {
 	try{
 		if(myId.checkId("struct")){
             myId.setSym(sym);
-            myId.setDecl(true);
-	        symTab.addDecl(myId.getName(),sym);
+            symTab.addDecl(myId.getName(),sym);
 		}
 	    }catch(DuplicateSymException e){
 
 	    }catch(EmptySymTableException e){
 		
 	    }
-	myId.nameAnalysis();
+    myId.nameAnalysis();
+    myId.setDecl(true);
 	myDeclList.nameAnalysis();
     }
 
