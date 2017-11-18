@@ -359,7 +359,7 @@ class VarDeclNode extends DeclNode {
            myId.setDecl(true);
            myId.setSym(sym);
            if (myId.checkId(sym.getType())){
-            return null;
+            //return null;
             }
 		return sym;
 	   }
