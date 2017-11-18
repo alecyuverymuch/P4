@@ -335,6 +335,7 @@ class VarDeclNode extends DeclNode {
 		SemSym s = new SemSym(myId.getName(),(symTab.lookupGlobal(myType.getType())).getDecls(),myType.getType());
 	      try{
               myId.setSym(s);
+              myId.setDecl(true);
 	        symTab.addDecl(s.getName(),s);
 	      }catch(DuplicateSymException e){
 
@@ -356,6 +357,8 @@ class VarDeclNode extends DeclNode {
 	else if(myId.checkId(myType.getType())){
             SemSym s = new SemSym(myId.getName(),myType.getType());
 	    try{
+            myId.setSym(s);
+            myId.setDecl(true);
 	        symTab.addDecl(s.getName(),s);
 	        return s;
 	    }catch(DuplicateSymException e){
@@ -469,6 +472,7 @@ class StructDeclNode extends DeclNode {
 	try{
 		if(myId.checkId("struct")){
             myId.setSym(sym);
+            myId.setDecl(true);
 	        symTab.addDecl(myId.getName(),sym);
 		}
 	    }catch(DuplicateSymException e){
