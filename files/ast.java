@@ -359,7 +359,13 @@ class VarDeclNode extends DeclNode {
            myId.setDecl(true);
            myId.setSym(sym);
            if (myId.checkId(sym.getType())){
-               symTab.addDecl(myId.getName(), sym);
+               try {
+                    symTab.addDecl(myId.getName(), sym);
+               } catch (EmptySymTableException e) {
+                   
+               } catch (DuplicateSymException e1) {
+                   
+               }
             //return null;
             }
 		return sym;
