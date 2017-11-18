@@ -1052,19 +1052,19 @@ class IdNode extends ExpNode {
     }
 
     public void undeclaredId(){
-	//ErrMsg.fatal(myLineNum, myCharNum, "Undeclared identifier");
+	ErrMsg.fatal(myLineNum, myCharNum, "Undeclared identifier");
     }
 
     public void structBadDecl(){
-	//ErrMsg.fatal(myLineNum, myCharNum, "Invalid name of struct type");
+	ErrMsg.fatal(myLineNum, myCharNum, "Invalid name of struct type");
     }
 
     public void structLhsAccess(){
-	//ErrMsg.fatal(myLineNum, myCharNum, "Dot-access of non-struct type");
+	ErrMsg.fatal(myLineNum, myCharNum, "Dot-access of non-struct type");
     }
 
     public void structRhsAccess(){
-	//ErrMsg.fatal(myLineNum, myCharNum, "Invalid struct field name");
+	ErrMsg.fatal(myLineNum, myCharNum, "Invalid struct field name");
     }
 
     public void unparse(PrintWriter p, int indent) {
