@@ -356,14 +356,16 @@ class VarDeclNode extends DeclNode {
 	}
 	else if(myId.checkId(myType.getType())){
             SemSym s = new SemSym(myId.getName(),myType.getType());
-	    try{
-	        symTab.addDecl(s.getName(),s);
+	    //try{
+            myId.setSym(s);
+            myId.setDecl(myId.nameAnalysis());
+	        //symTab.addDecl(s.getName(),s);
 	        return s;
-	    }catch(DuplicateSymException e){
+	    // }catch(DuplicateSymException e){
 
-	    }catch(EmptySymTableException e){
+	    // }catch(EmptySymTableException e){
 		
-	    }
+	    // }
 	}
 	return null;
     }
@@ -1014,7 +1016,7 @@ class IdNode extends ExpNode {
                 mySym = new SemSym(myStrVal, returnType, params, paramTypes);
                 symTab.addDecl(myStrVal, mySym);
             } catch (DuplicateSymException e) {
-                
+
             } catch (EmptySymTableException e) {
                 //TODO maybe to do with scopes?
             }
