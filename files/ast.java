@@ -358,8 +358,8 @@ class VarDeclNode extends DeclNode {
             SemSym s = new SemSym(myId.getName(),myType.getType());
 	    try{
             myId.setSym(s);
-            //myId.setDecl(true);
-            //myId.nameAnalysis();
+            myId.setDecl(true);
+            myId.nameAnalysis();
 	        symTab.addDecl(s.getName(),s);
 	        return s;
 	     }catch(DuplicateSymException e){
