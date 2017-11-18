@@ -8,12 +8,12 @@ bool def2;
 bool y;
 // Tests struct declarations
 struct ghi1 { int z1; bool z2; };
-struct ghi2 { int e; bool f; int g; bool h; };
-struct ghi2 ghi3;
-// Test function declaration
-void test1() {
-}
-// Test function declaration with a parameter
+struct ghi2 { int e; bool f; int g; bool h; struct ghi1 ghi3;};
+struct ghi4 { struct ghi2 ghi5; struct ghi1 ghi1; };
+struct ghi4 ghi6;
+// Test function declaration and struct dot access
+void test1() {}
+// Test function declaration with a parameter and struct dot access with operations
 void test2(int one) {}
 // Test function declaration with multiple parameters
 void test3(int one, int two, bool three, bool four){}
@@ -110,17 +110,6 @@ void test13(int j, bool k, int l, bool m) {
 int test14(int s, bool t) {
     t = !((7 + s - 5 * 4 / 2) == true) && (7 <=5 )||(7 != 7)||(7 <5 )||(7 >=5 )||(7 >5 );
 }
-
-
-//////////////////////////////////////
-// Tests dot operator
-//bool test15(bool b){
-//    int x; 
-//    x = b.c.v;
-//}
-/////////////////////////////////////
-
-
 // Tests strings
 bool test16(bool b){
     int x; 
@@ -154,17 +143,14 @@ int test19(){
         y = true;
     }
 }
-
-
-
-//////////////////////////////////////////////////////////
 // Tests structs
 void test20() {
-
+    x = ghi1.z1;
+    x = ghi2.g;
+    x = ghi6.ghi5.ghi3.z1;
+    ghi6.ghi5.e = x;
+    y = ghi2.f && ghi1.z2 && ghi4.ghi5.ghi3.z2;
 }
-////////////////////////////////////////////////////////////////
-
-
 // Comprehensive Tests
 int main() { 
     int a1; # comment
@@ -201,13 +187,6 @@ int main() {
     while (a1 > a2) {
         int x;
         x = 4;
-
-        /////////////////////////////////////////////
-        //x = a1.a2.a3;
-        // a1.a2.a3 = x;
-        /////////////////////////////////////////////
-
-
         a1 = x;
     }
     a1 = test5(a2, b2);

@@ -1,10 +1,17 @@
 void a; //Non-function declared void
 int b;
 int b; //Multiply declared identifier
+void b; //both Non-function declared void and Multiply declared identifier
 struct c {
     int x;
+    void y; //Non-function declared void
+    bool x; //Multiply declared identifier
+    void x; //both Multiply declared identifier and Non-function declared void
 };
+struct a {int x;}; //Muliply declared identifier
+struct c a; //Muliply declared identifier
 struct b d; //Invalid name of struct type
+struct e {struct xx c;} //invalid name of struct type
 int test() {
     int f;
     int g;

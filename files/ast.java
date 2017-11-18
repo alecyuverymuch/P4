@@ -332,9 +332,10 @@ class VarDeclNode extends DeclNode {
         myId.setDecl(true);
 	if(myType instanceof StructNode){
 	   if(((StructNode)myType).checkType()){
-		SemSym s = new SemSym(myId.getName(),(symTab.lookupGlobal(myType.getType())).getDecls(),myType.getType());
+		SemSym s = new SemSym(myId.getName(),(symTab.lookupGlobal(myType.getType	())).getDecls(),myType.getType());
 	      try{
-              myId.setSym(s);
+                myId.setSym(s);
+		((StructNode)myType).setType(s.getType());		
 	        symTab.addDecl(s.getName(),s);
 	      }catch(DuplicateSymException e){
 
@@ -578,11 +579,21 @@ class StructNode extends TypeNode {
         return myId;
     }
 
+    public void setType(String type){
+	this.type = type;
+    }
+
     public void unparse(PrintWriter p, int indent) {
-        p.print("struct ");
-		myId.unparse(p, 0);
+	if(type.equals("")){
+           p.print("struct ");
+           myId.unparse(p, 0);
+	}else{
+	  p.print("struct ");
+	  p.print(type);
+	}
     }
     private IdNode myId;
+    private String type = "";
 }
 
 // **********************************************************************
@@ -1058,6 +1069,7 @@ class IdNode extends ExpNode {
             p.print(myStrVal);
             return;
         }
+	
         if (mySym.isFunc()) {
             p.print(myStrVal);
             List<String> types = mySym.getParamTypes();
@@ -1108,6 +1120,10 @@ class DotAccessExpNode extends ExpNode {
 		SemSym sym = s.getDecls().get(myId.getName());
 		if(sym == null){
 		    myId.structRhsAccess();
+		    
+		}else{
+		((IdNode)myLoc).setSym(s);
+		myId.setSym(sym);
 		}
 	    }
 	    //maybe need to store something
@@ -1128,7 +1144,9 @@ class DotAccessExpNode extends ExpNode {
 		if(sym == null){
 		    myId.structRhsAccess();
 		}else{
+		   ((IdNode)myLoc).setSym(s);
 		   sym.setId(myId);
+		   myId.setSym(sym);
 		   return sym;
 		}
 	    }
@@ -1147,6 +1165,7 @@ class DotAccessExpNode extends ExpNode {
 		if(sym == null){
 		    myId.structRhsAccess();
 		}else{
+		   myId.setSym(sym);
 		   sym.setId(myId);
 		   return sym;
 		}
@@ -1156,9 +1175,9 @@ class DotAccessExpNode extends ExpNode {
     }
 
     public void unparse(PrintWriter p, int indent) {
-	    p.print("(");
+	    p.print("");
         myLoc.unparse(p, 0);
-		p.print(").");
+		p.print(".");
         myId.unparse(p, 0);
     }
 
