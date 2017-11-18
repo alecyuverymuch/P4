@@ -353,7 +353,7 @@ class VarDeclNode extends DeclNode {
 	   if(((StructNode)myType).checkType()){
            SemSym sym = new SemSym(myId.getName(),(symTab.lookupGlobal(myType.getType())).getDecls(),myType.getType());
            myId.setSym(sym);
-		return sym
+		return sym;
 	   }
 	}
 	else if(myId.checkId(myType.getType())){
