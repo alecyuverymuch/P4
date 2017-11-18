@@ -569,7 +569,7 @@ class StructNode extends TypeNode {
 	SemSym s = symTab.lookupGlobal(myId.getName());
 	boolean check = true;
 	if(s == null){
-	   myId.undeclaredId();
+	   //myId.undeclaredId();
 	   check = false;
 	}else if(!s.getType().equals("struct")){
 	   myId.structBadDecl();
