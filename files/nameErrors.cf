@@ -11,7 +11,7 @@ struct c {
 struct a {int x;}; //Muliply declared identifier
 struct c a; //Muliply declared identifier
 struct b d; //Invalid name of struct type
-struct e {struct xx c;} //invalid name of struct type
+struct e {struct xx c;}; //invalid name of struct type
 int test() {
     int f;
     int g;
