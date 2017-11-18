@@ -9,7 +9,7 @@ struct c {
     void x; //both Multiply declared identifier and Non-function declared void
 };
 struct a {int x;}; //Muliply declared identifier
-struct z {struct c a; struct c a;};
+struct z {struct c a; struct c a;}; 
 struct z {int x;}; //Muliply declared identifier
 struct c b; //Muliply declared identifier
 struct b d; //Invalid name of struct type
