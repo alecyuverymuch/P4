@@ -21,3 +21,4 @@ int test() {
     f = g.x; //Dot-access of non-struct type
     g = c.y; //Invalid struct field name
 }
+

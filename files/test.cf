@@ -3,10 +3,6 @@
 int abc1;
 int abc2;
 int x;
-struct c {
-    int asd;
-};
-struct z {struct c a; struct c a;};
 bool def1;
 bool def2;
 bool y;
