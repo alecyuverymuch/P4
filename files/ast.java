@@ -359,7 +359,13 @@ class VarDeclNode extends DeclNode {
 	    //try{
             myId.setSym(s);
             myId.setDecl(true);
-            //myId.nameAnalysis();
+            symTab.addScope();
+            myId.nameAnalysis();
+            try{
+                symTab.removeScope();
+            } catch (EmptySymTableException e) {
+                
+            }
 	        //symTab.addDecl(s.getName(),s);
 	        return s;
 	    // }catch(DuplicateSymException e){
